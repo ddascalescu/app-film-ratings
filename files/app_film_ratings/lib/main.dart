@@ -11,6 +11,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final String lol = "NutBulb";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
