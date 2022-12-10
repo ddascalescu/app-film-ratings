@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 const String appTitle = 'Film Ratings';
 
@@ -8,7 +10,7 @@ void main()  => runApp(const App());
 class App extends StatelessWidget {
   const App({super.key});
 
-  final String lol = "NutBulb";
+  final String lol = 'NutBulb';
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,10 @@ class TextEntryList extends StatefulWidget {
 class _TextEntryListState extends State<TextEntryList> {
   final _textController = TextEditingController();
   final _numberController = TextEditingController();
+
+  final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+  DateTime _selectedDate = DateTime.now();
+
   final _items = <String>[];
 
   @override
@@ -56,7 +62,6 @@ class _TextEntryListState extends State<TextEntryList> {
         Row(
           children: [
             Expanded(
-              flex: 10,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
@@ -68,16 +73,49 @@ class _TextEntryListState extends State<TextEntryList> {
               ),
             ),
 
-            Expanded(
-              flex: 1,
+            SizedBox(
+              width: 50.0,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: _numberController,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    RatingInputFormatter()
+                  ],
                   decoration: const InputDecoration(
                     hintText: '8.5',
                     counterText: '',
                   )
+                ),
+              ),
+            ),
+
+            SizedBox(
+              width: 150.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  readOnly: true,
+                  controller: TextEditingController(
+                    text: dateFormat.format(_selectedDate),
+                  ),
+                  textAlign: TextAlign.center,
+                  onTap: () async {
+                    final DateTime? picked = await showDatePicker(
+                      context: context,
+                      initialDate: _selectedDate,
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100),
+                    );
+
+                    if (picked != null && picked != _selectedDate) {
+                      setState(() {
+                        _selectedDate = picked;
+                      });
+                    }
+                  }
                 ),
               ),
             ),
@@ -88,10 +126,11 @@ class _TextEntryListState extends State<TextEntryList> {
                 child: const Text('Add'),
                 onPressed: () {
                   setState(() {
-                    _items.add("${_textController.text}, ${_numberController.text}");
+                    _items.add("${_textController.text}, ${_numberController.text}, ${dateFormat.format(_selectedDate)}");
                   });
                   _textController.clear();
                   _numberController.clear();
+                  _selectedDate = DateTime.now();
                 },
               ),
             ),
@@ -113,4 +152,32 @@ class _TextEntryListState extends State<TextEntryList> {
   }
 }
 
+class RatingInputFormatter extends TextInputFormatter {
+  final double minValue = 0.0;
+  final double maxValue = 10.0;
+  final regex = RegExp(r'^\d\.?\d?$');
 
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+    if (!regex.hasMatch(newValue.text)) {
+      return oldValue;
+    }
+
+    final double? value = double.tryParse(newValue.text);
+    if (value == null) {
+      return oldValue;
+    }
+    if (value > maxValue) {
+      return oldValue;
+    }
+    if (value < minValue) {
+      return oldValue;
+    }
+
+    return newValue;
+  }
+
+}
