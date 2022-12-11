@@ -107,7 +107,7 @@ class _TextEntryListState extends State<TextEntryList> {
                       context: context,
                       initialDate: _selectedDate,
                       firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
+                      lastDate: DateTime.now(),
                     );
 
                     if (picked != null && picked != _selectedDate) {
