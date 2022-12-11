@@ -125,12 +125,19 @@ class _TextEntryListState extends State<TextEntryList> {
               child: ElevatedButton(
                 child: const Text('Add'),
                 onPressed: () {
-                  setState(() {
-                    _items.add("${_textController.text}, ${_numberController.text}, ${dateFormat.format(_selectedDate)}");
-                  });
-                  _textController.clear();
-                  _numberController.clear();
-                  _selectedDate = DateTime.now();
+                  if (_textController.text.isNotEmpty && _numberController.text.isNotEmpty) {
+                    setState(() {
+                      _items.add(
+                          "${_textController.text}, ${_numberController.text}, ${dateFormat.format(_selectedDate)}"
+                      );
+
+                      _textController.clear();
+                      _numberController.clear();
+                      _selectedDate = DateTime.now();
+                    });
+                  } else {
+                    // TODO: warn user that text is empty
+                  }
                 },
               ),
             ),
