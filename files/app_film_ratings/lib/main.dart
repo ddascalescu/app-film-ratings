@@ -5,8 +5,7 @@ import 'formatters.dart';
 
 const String appTitle = 'Film Ratings';
 
-void main()  => runApp(const App());
-
+void main() => runApp(const App());
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,8 +15,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: appTitle,
-      home: MainScreen()
+        title: appTitle,
+        home: MainScreen()
     );
   }
 }
@@ -31,156 +30,163 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(appTitle),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: TextEntryList()
-      ),
-
+      // TODO: make all paddings into a decorator
+      body: const Padding(padding: EdgeInsets.all(8.0),
+          child: RatingsTable()
+      )
     );
   }
 }
 
-class TextEntryList extends StatefulWidget {
-  const TextEntryList({super.key});
+class RatingsTable extends StatefulWidget {
+  const RatingsTable({super.key});
 
   @override
-  State<TextEntryList> createState() => _TextEntryListState();
+  State<RatingsTable> createState() => _RatingsTableState();
 }
 
-class _TextEntryListState extends State<TextEntryList> {
+class _RatingsTableState extends State<RatingsTable> {
   final _textController = TextEditingController();
   final _numberController = TextEditingController();
   final _yearController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
 
-  final _items = <String>[];
+  final List<Rating> ratings = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _textController,
-                  decoration: const InputDecoration(
-                    hintText: 'The Shawshank Redemption'
-                  )
-                ),
-              ),
-            ),
-
-            SizedBox(
-              width: 100.0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                    controller: _yearController,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      YearInputFormatter()
-                    ],
-                    decoration: const InputDecoration(
-                        hintText: '1994'
-                    )
-                ),
-              ),
-            ),
-
-            SizedBox(
-              width: 50.0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _numberController,
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    RatingInputFormatter()
-                  ],
-                  decoration: const InputDecoration(
-                    hintText: '8.5'
-                  )
-                ),
-              ),
-            ),
-
-            SizedBox(
-              width: 150.0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  readOnly: true,
-                  controller: TextEditingController(
-                    text: Ratings.dateFormat.format(_selectedDate),
-                  ),
-                  textAlign: TextAlign.center,
-                  onTap: () async {
-                    final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: _selectedDate,
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                    );
-
-                    if (picked != null && picked != _selectedDate) {
-                      setState(() {
-                        _selectedDate = picked;
-                      });
-                    }
-                  }
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                child: const Text('Add'),
-                onPressed: () {
-                  if (_textController.text.isNotEmpty && _numberController.text.isNotEmpty) {
-                    setState(() {
-                      _items.add(
-                          "${_textController.text} (${_yearController.text}), ${double.parse(_numberController.text).toStringAsFixed(1)}, ${Ratings.dateFormat.format(_selectedDate)}"
-                      );
-                      Rating r = Rating(
-                          _textController.text,
-                          int.parse(_yearController.text),
-                          double.parse(_numberController.text),
-                          _selectedDate
-                      );
-                      print('\n$r');
-
-                      _textController.clear();
-                      _yearController.clear();
-                      _numberController.clear();
-                      _selectedDate = DateTime.now();
-                    });
-                  } else {
-                    // TODO: warn user that text is empty
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
-
-        Expanded(
-          child: ListView.builder(
-            itemCount: _items.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(_items[index]),
-              );
-            },
+    return Column(children: [
+      Row(
+        children: [
+          /* ENTRY: Film title */
+          Expanded(
+            child: Padding(padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _textController,
+                decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
+              )
+            )
           ),
-        ),
-      ],
-    );
+
+          /* ENTRY: Film year */
+          SizedBox(
+            width: 100.0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _yearController,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                inputFormatters: [YearInputFormatter()],
+                decoration: const InputDecoration(hintText: '1994')
+              )
+            )
+          ),
+
+          /* ENTRY: Rating */
+          SizedBox(
+            width: 50.0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _numberController,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                inputFormatters: [RatingInputFormatter()],
+                decoration: const InputDecoration(hintText: '8.5')
+              )
+            )
+          ),
+
+          /* ENTRY: Rating date */
+          SizedBox(
+            width: 150.0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                readOnly: true,
+                // TODO: maybe make this not a controller?
+                controller: TextEditingController(
+                  text: Ratings.dateFormat.format(_selectedDate),
+                ),
+                textAlign: TextAlign.center,
+
+                onTap: () async {
+                  final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: _selectedDate,
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (picked != null && picked != _selectedDate) {
+                    setState(() {
+                      _selectedDate = picked;
+                    });
+                  }
+                }
+
+              )
+            )
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              child: const Text('Add'),
+
+              onPressed: () {
+                // TODO: put into addItem method
+                if (_textController.text.isNotEmpty &&
+                    _numberController.text.isNotEmpty) {
+                  setState(() {
+                    Rating r = Rating(
+                        _textController.text,
+                        int.parse(_yearController.text),
+                        double.parse(_numberController.text),
+                        _selectedDate);
+                    addRating(r);
+
+                    _textController.clear();
+                    _yearController.clear();
+                    _numberController.clear();
+                    _selectedDate = DateTime.now();
+                  });
+                } else {
+                  // TODO: warn user that text is empty
+                }
+              }
+
+            )
+          )
+        ]
+      ),
+
+      Expanded(
+        child: DataTable(
+          columns: const [
+            DataColumn(label: Text('Title')),
+            DataColumn(label: Text('Year')),
+            DataColumn(label: Text('Rating')),
+            DataColumn(label: Text('Date'))
+          ],
+          rows: ratings
+              .map((rating) => DataRow(cells: [
+                    DataCell(Text(rating.filmTitle)),
+                    DataCell(Text(rating.yearString)),
+                    DataCell(Text(rating.ratingString)),
+                    DataCell(Text(rating.ratingDateString))
+                  ]))
+              .toList()
+        )
+      )
+    ]);
+  }
+
+  void addRating(Rating rating) {
+    setState(() {
+      ratings.add(rating);
+    });
   }
 }
