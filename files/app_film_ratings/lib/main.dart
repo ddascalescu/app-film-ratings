@@ -57,6 +57,7 @@ class _RatingsTableState extends State<RatingsTable> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      /* Entries row */
       Row(
         children: [
           /* ENTRY: Film title */
@@ -131,6 +132,7 @@ class _RatingsTableState extends State<RatingsTable> {
             )
           ),
 
+          /* BUTTON: Add rating */
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
@@ -163,7 +165,11 @@ class _RatingsTableState extends State<RatingsTable> {
         ]
       ),
 
-      Expanded(
+      /* Data table */
+      // TODO: make title the only column that expands
+      // TODO: might not need this hack, maybe just row and expanded
+      Row(children: [Expanded(child: SingleChildScrollView( // hack to make DataTable fit width
+        scrollDirection: Axis.vertical,
         child: DataTable(
           columns: const [
             DataColumn(label: Text('Title')),
@@ -180,7 +186,7 @@ class _RatingsTableState extends State<RatingsTable> {
                   ]))
               .toList()
         )
-      )
+      ))])
     ]);
   }
 
