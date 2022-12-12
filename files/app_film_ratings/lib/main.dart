@@ -49,6 +49,7 @@ class TextEntryList extends StatefulWidget {
 class _TextEntryListState extends State<TextEntryList> {
   final _textController = TextEditingController();
   final _numberController = TextEditingController();
+  final _yearController = TextEditingController();
 
   final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   DateTime _selectedDate = DateTime.now();
@@ -69,8 +70,26 @@ class _TextEntryListState extends State<TextEntryList> {
                 child: TextField(
                   controller: _textController,
                   decoration: const InputDecoration(
-                    hintText: 'The Shawshank Redemption',
+                    hintText: 'The Shawshank Redemption'
                   )
+                ),
+              ),
+            ),
+
+            SizedBox(
+              width: 100.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                    controller: _yearController,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      YearInputFormatter()
+                    ],
+                    decoration: const InputDecoration(
+                        hintText: '1994'
+                    )
                 ),
               ),
             ),
@@ -87,8 +106,7 @@ class _TextEntryListState extends State<TextEntryList> {
                     RatingInputFormatter()
                   ],
                   decoration: const InputDecoration(
-                    hintText: '8.5',
-                    counterText: '',
+                    hintText: '8.5'
                   )
                 ),
               ),
@@ -130,10 +148,11 @@ class _TextEntryListState extends State<TextEntryList> {
                   if (_textController.text.isNotEmpty && _numberController.text.isNotEmpty) {
                     setState(() {
                       _items.add(
-                          "${_textController.text}, ${double.parse(_numberController.text).toStringAsFixed(1)}, ${dateFormat.format(_selectedDate)}"
+                          "${_textController.text} (${_yearController.text}), ${double.parse(_numberController.text).toStringAsFixed(1)}, ${dateFormat.format(_selectedDate)}"
                       );
 
                       _textController.clear();
+                      _yearController.clear();
                       _numberController.clear();
                       _selectedDate = DateTime.now();
                     });
@@ -158,6 +177,35 @@ class _TextEntryListState extends State<TextEntryList> {
         ),
       ],
     );
+  }
+}
+
+class YearInputFormatter extends TextInputFormatter {
+  final int minValue = 0000;
+  final int maxValue = DateTime.now().year;
+  final regex = RegExp(r'^\d+$');
+
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+    if (!regex.hasMatch(newValue.text)) {
+      return oldValue;
+    }
+
+    final int? value = int.tryParse(newValue.text);
+    if (value == null) {
+      return oldValue;
+    }
+    if (value > maxValue) {
+      return oldValue;
+    }
+    if (value < minValue) {
+      return oldValue;
+    }
+
+    return newValue;
   }
 }
 
@@ -188,5 +236,4 @@ class RatingInputFormatter extends TextInputFormatter {
 
     return newValue;
   }
-
 }
