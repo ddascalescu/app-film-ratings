@@ -6,6 +6,7 @@ TODO (before V1 and public):
  - Make items into ratings objects with fields
  - Removal from list
  - File storage for saved films
+ - Add picture to readme
  - Release versions, and update repo description with where to find
 
 Features:
