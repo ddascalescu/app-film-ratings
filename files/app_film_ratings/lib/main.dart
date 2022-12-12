@@ -53,6 +53,8 @@ class _TextEntryListState extends State<TextEntryList> {
   final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   DateTime _selectedDate = DateTime.now();
 
+  final NumberFormat ratingFormat = NumberFormat('##');
+
   final _items = <String>[];
 
   @override
@@ -128,7 +130,7 @@ class _TextEntryListState extends State<TextEntryList> {
                   if (_textController.text.isNotEmpty && _numberController.text.isNotEmpty) {
                     setState(() {
                       _items.add(
-                          "${_textController.text}, ${_numberController.text}, ${dateFormat.format(_selectedDate)}"
+                          "${_textController.text}, ${double.parse(_numberController.text).toStringAsFixed(1)}, ${dateFormat.format(_selectedDate)}"
                       );
 
                       _textController.clear();
