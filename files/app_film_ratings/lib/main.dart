@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 import 'utils/ratings.dart';
+import 'formatters.dart';
 
 const String appTitle = 'Film Ratings';
 
@@ -53,10 +52,7 @@ class _TextEntryListState extends State<TextEntryList> {
   final _numberController = TextEditingController();
   final _yearController = TextEditingController();
 
-  final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   DateTime _selectedDate = DateTime.now();
-
-  final NumberFormat ratingFormat = NumberFormat('##');
 
   final _items = <String>[];
 
@@ -121,7 +117,7 @@ class _TextEntryListState extends State<TextEntryList> {
                 child: TextField(
                   readOnly: true,
                   controller: TextEditingController(
-                    text: dateFormat.format(_selectedDate),
+                    text: Ratings.dateFormat.format(_selectedDate),
                   ),
                   textAlign: TextAlign.center,
                   onTap: () async {
@@ -150,7 +146,7 @@ class _TextEntryListState extends State<TextEntryList> {
                   if (_textController.text.isNotEmpty && _numberController.text.isNotEmpty) {
                     setState(() {
                       _items.add(
-                          "${_textController.text} (${_yearController.text}), ${double.parse(_numberController.text).toStringAsFixed(1)}, ${dateFormat.format(_selectedDate)}"
+                          "${_textController.text} (${_yearController.text}), ${double.parse(_numberController.text).toStringAsFixed(1)}, ${Ratings.dateFormat.format(_selectedDate)}"
                       );
                       Rating r = Rating(
                           _textController.text,
@@ -158,7 +154,7 @@ class _TextEntryListState extends State<TextEntryList> {
                           double.parse(_numberController.text),
                           _selectedDate
                       );
-                      print('\n${r}');
+                      print('\n$r');
 
                       _textController.clear();
                       _yearController.clear();
@@ -186,63 +182,5 @@ class _TextEntryListState extends State<TextEntryList> {
         ),
       ],
     );
-  }
-}
-
-class YearInputFormatter extends TextInputFormatter {
-  final int minValue = 0000;
-  final int maxValue = DateTime.now().year;
-  final regex = RegExp(r'^\d+$');
-
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.isEmpty) {
-      return newValue;
-    }
-    if (!regex.hasMatch(newValue.text)) {
-      return oldValue;
-    }
-
-    final int? value = int.tryParse(newValue.text);
-    if (value == null) {
-      return oldValue;
-    }
-    if (value > maxValue) {
-      return oldValue;
-    }
-    if (value < minValue) {
-      return oldValue;
-    }
-
-    return newValue;
-  }
-}
-
-class RatingInputFormatter extends TextInputFormatter {
-  final double minValue = 0.0;
-  final double maxValue = 10.0;
-  final regex = RegExp(r'^\d\.?\d?$');
-
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.isEmpty) {
-      return newValue;
-    }
-    if (!regex.hasMatch(newValue.text)) {
-      return oldValue;
-    }
-
-    final double? value = double.tryParse(newValue.text);
-    if (value == null) {
-      return oldValue;
-    }
-    if (value > maxValue) {
-      return oldValue;
-    }
-    if (value < minValue) {
-      return oldValue;
-    }
-
-    return newValue;
   }
 }
