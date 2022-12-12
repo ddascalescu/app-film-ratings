@@ -167,6 +167,7 @@ class _RatingsTableState extends State<RatingsTable> {
 
       /* Data table */
       // TODO: make title the only column that expands
+      // TODO: make table vertically scrollable
       // TODO: might not need this hack, maybe just row and expanded
       Row(children: [Expanded(child: SingleChildScrollView( // hack to make DataTable fit width
         scrollDirection: Axis.vertical,
