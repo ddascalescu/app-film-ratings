@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import 'utils/ratings.dart';
+
 const String appTitle = 'Film Ratings';
 
 void main()  => runApp(const App());
@@ -150,6 +152,13 @@ class _TextEntryListState extends State<TextEntryList> {
                       _items.add(
                           "${_textController.text} (${_yearController.text}), ${double.parse(_numberController.text).toStringAsFixed(1)}, ${dateFormat.format(_selectedDate)}"
                       );
+                      Rating r = Rating(
+                          _textController.text,
+                          int.parse(_yearController.text),
+                          double.parse(_numberController.text),
+                          _selectedDate
+                      );
+                      print('\n${r}');
 
                       _textController.clear();
                       _yearController.clear();
