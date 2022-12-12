@@ -2,8 +2,6 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Change list for a table with headings
- - Make items into ratings objects with fields
  - Removal from list
  - File storage for saved films
  - Add picture to readme
