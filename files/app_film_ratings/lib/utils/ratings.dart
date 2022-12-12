@@ -25,4 +25,8 @@ class Rating {
         '\tRating date: ${Ratings.dateFormat.format(ratingDate!)}\n'
       '}';
   }
+
+  String get yearString => filmYear.toString();
+  String get ratingString => rating.toStringAsFixed(1);
+  String get ratingDateString => Ratings.dateFormat.format(ratingDate!);
 }
