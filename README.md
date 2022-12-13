@@ -25,4 +25,5 @@ Planned features:
      - number of times rating a year
  - Define custom analytics that the user wants to see often, display on main analytics screen
 
-Dan Dascalescu
+#
+[Dan Dascalescu](https://github.com/ddascalescu)
