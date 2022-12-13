@@ -3,12 +3,12 @@ A Flutter app for rating films
 
 TODO (before V1 and public):
  - Removal from list
- - File storage for saved films
+ - Local file storage for saved films
  - Add picture to readme
  - Release versions, and update repo description with where to find
 
 Features:
- - Adding film ratings to a list
+ - Adding film ratings to a table
 
 Planned features:
  - Changing adding entries into a '+' button that brings up a box, involving the next point
@@ -24,6 +24,14 @@ Planned features:
      - number of times rated 0-1, 1-2, 2-3, etc. (option for granularity)
      - number of times rating a year
  - Define custom analytics that the user wants to see often, display on main analytics screen
-
+ - Settings
+   - Changing granularity and scale of ratings - I.e. can set min, max, and step
+ - 'date joined' value in 'about' section
+   - can include as line in date-based charts, to distinguish between old and new rating systems
+ - Syncing save files between devices - maybe gdrive?
+ - Exporting data
+   - json, csv, etc.
+   - export chart PNGs
+ 
 #
 [Dan Dascalescu](https://github.com/ddascalescu)
