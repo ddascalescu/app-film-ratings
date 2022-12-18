@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 import 'utils/ratings.dart';
 import 'formatters.dart';
@@ -207,4 +209,15 @@ class _RatingsTableState extends State<RatingsTable> {
       ratings.remove(rating);
     });
   }
+}
+
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+
+  return directory.path;
+}
+
+Future<File> get _localFile async {
+  final path = await _localPath;
+  return File('$path/ratings.json');
 }
