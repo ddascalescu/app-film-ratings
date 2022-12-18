@@ -2,13 +2,13 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Removal from list
  - Local file storage for saved films
  - Add picture to readme
  - Release versions, and update repo description with where to find
 
 Features:
  - Adding film ratings to a table
+ - Removal from the table
 
 Planned features:
  - Changing adding entries into a '+' button that brings up a box, involving the next point
