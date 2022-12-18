@@ -52,7 +52,7 @@ class _RatingsTableState extends State<RatingsTable> {
 
   DateTime _selectedDate = DateTime.now();
 
-  final List<Rating> ratings = List.empty(growable: true);
+  final List<Rating> ratings = [];
 
   @override
   Widget build(BuildContext context) {
