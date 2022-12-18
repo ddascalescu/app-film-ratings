@@ -4,6 +4,7 @@ import 'dart:convert';
 class Ratings {
   static final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
+  // TODO: make this write nicely, not just on one line
   static String encode(List<Rating> ratings) {
     return jsonEncode(ratings);
   }
@@ -14,8 +15,7 @@ class Ratings {
 
     List<Rating> ratings = [];
     for (var r in l) {
-      assert (r is Rating);
-      ratings.add(r);
+      ratings.add(Rating.fromJson(r));
     }
     return ratings;
   }
@@ -33,17 +33,30 @@ class Rating {
     this.ratingDate = DateTime(ratingDate.year, ratingDate.month, ratingDate.day);
   }
 
+  String get yearString => filmYear.toString();
+  String get ratingString => rating.toStringAsFixed(1);
+  String get ratingDateString => Ratings.dateFormat.format(ratingDate!);
+
   @override
   String toString() {
     return
       'Rating {\n'
         '\tFilm: $filmTitle ($filmYear)\n'
         '\tRating: $rating\n'
-        '\tRating date: ${Ratings.dateFormat.format(ratingDate!)}\n'
+        '\tRating date: $ratingDateString\n'
       '}';
   }
 
-  String get yearString => filmYear.toString();
-  String get ratingString => rating.toStringAsFixed(1);
-  String get ratingDateString => Ratings.dateFormat.format(ratingDate!);
+  Map<String, dynamic> toJson() => {
+    'title': filmTitle,
+    'year': filmYear,
+    'rating': rating,
+    'date': ratingDateString
+  };
+
+  Rating.fromJson(Map<String, dynamic> json)
+      : filmTitle = json['title'],
+        filmYear = json['year'],
+        rating = json['rating'],
+        ratingDate = Ratings.dateFormat.parse(json['date']);
 }

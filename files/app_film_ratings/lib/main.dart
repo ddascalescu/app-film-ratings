@@ -202,22 +202,58 @@ class _RatingsTableState extends State<RatingsTable> {
     setState(() {
       ratings.add(rating);
     });
+    writeRatings(ratings);
   }
 
   void removeRating(Rating rating) {
     setState(() {
       ratings.remove(rating);
     });
+    writeRatings(ratings);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readRatings().then((ratings) {
+      setState(() {
+        this.ratings.addAll(ratings);
+      });
+    });
+  }
+
+  // TODO: figure out why not calling
+  @override
+  void dispose() {
+    writeRatings(ratings).then((_) {
+      super.dispose();
+    });
+  }
+
+  Future<File> writeRatings(List<Rating> ratings) async {
+    final file = await _localFile;
+    String data = Ratings.encode(ratings);
+    return file.writeAsString(data);
+  }
+
+  Future<List<Rating>> readRatings() async {
+    try {
+      final file = await _localFile;
+      String data = await file.readAsString();
+      return Ratings.decode(data);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    // TODO: make this OS-independent
+    return File('$path\\Film Ratings\\ratings.json').create(recursive: true);
   }
 }
 
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
-
   return directory.path;
-}
-
-Future<File> get _localFile async {
-  final path = await _localPath;
-  return File('$path/ratings.json');
 }
