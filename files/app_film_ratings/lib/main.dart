@@ -176,14 +176,19 @@ class _RatingsTableState extends State<RatingsTable> {
             DataColumn(label: Text('Title')),
             DataColumn(label: Text('Year')),
             DataColumn(label: Text('Rating')),
-            DataColumn(label: Text('Date'))
+            DataColumn(label: Text('Date')),
+            DataColumn(label: Text(''))
           ],
           rows: ratings
               .map((rating) => DataRow(cells: [
                     DataCell(Text(rating.filmTitle)),
                     DataCell(Text(rating.yearString)),
                     DataCell(Text(rating.ratingString)),
-                    DataCell(Text(rating.ratingDateString))
+                    DataCell(Text(rating.ratingDateString)),
+                    DataCell(IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () { removeRating(rating); }
+                    ))
                   ]))
               .toList()
         )
@@ -194,6 +199,12 @@ class _RatingsTableState extends State<RatingsTable> {
   void addRating(Rating rating) {
     setState(() {
       ratings.add(rating);
+    });
+  }
+
+  void removeRating(Rating rating) {
+    setState(() {
+      ratings.remove(rating);
     });
   }
 }
