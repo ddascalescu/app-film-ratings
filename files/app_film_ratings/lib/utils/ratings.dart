@@ -3,6 +3,22 @@ import 'dart:convert';
 
 class Ratings {
   static final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+
+  static String encode(List<Rating> ratings) {
+    return jsonEncode(ratings);
+  }
+
+  static List<Rating> decode(String data) {
+    var l = jsonDecode(data);
+    assert (l is List);
+
+    List<Rating> ratings = [];
+    for (var r in l) {
+      assert (r is Rating);
+      ratings.add(r);
+    }
+    return ratings;
+  }
 }
 
 class Rating {
@@ -25,22 +41,6 @@ class Rating {
         '\tRating: $rating\n'
         '\tRating date: ${Ratings.dateFormat.format(ratingDate!)}\n'
       '}';
-  }
-
-  String encode(List<Rating> ratings) {
-    return jsonEncode(ratings);
-  }
-
-  List<Rating> decode(String data) {
-    var l = jsonDecode(data);
-    assert (l is List);
-
-    List<Rating> ratings = [];
-    for (var r in l) {
-      assert (r is Rating);
-      ratings.add(r);
-    }
-    return ratings;
   }
 
   String get yearString => filmYear.toString();
