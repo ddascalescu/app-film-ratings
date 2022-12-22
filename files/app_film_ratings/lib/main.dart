@@ -192,6 +192,12 @@ class _RatingsTableState extends State<RatingsTable> {
         double.parse(_numberController.text),
         _selectedDate
       );
+      if (r.filmYear < 1850) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Year must be greater than 1850'))
+        );
+        return;
+      }
       setState(() {
         ratings.add(r);
 
