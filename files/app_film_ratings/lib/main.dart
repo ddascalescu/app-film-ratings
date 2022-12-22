@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+import 'package:data_table_2/data_table_2.dart';
+
 import 'utils/ratings.dart';
 import 'formatters.dart';
 
@@ -59,6 +61,7 @@ class _RatingsTableState extends State<RatingsTable> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: make minimum size for window (min size for certain widgets)
     return Column(children: [
       /* Entries row */
       Row(
@@ -170,7 +173,30 @@ class _RatingsTableState extends State<RatingsTable> {
 
       /* Data table headers */
       // TODO: make title the only column that expands (set widths of other columns, align)
-      Row(children: [Expanded(child:
+      Expanded(child:
+        DataTable2(
+          columns: const [
+            DataColumn(label: Text('Title')),
+            DataColumn2(label: Text('Year'), fixedWidth: 100),
+            DataColumn2(label: Text('Rating'), fixedWidth: 100),
+            DataColumn2(label: Text('Date'), fixedWidth: 150),
+            DataColumn2(label: Text(''), fixedWidth: 75)
+          ],
+          rows: ratings
+              .map((rating) => DataRow(cells: [
+            DataCell(Text(rating.filmTitle)),
+            DataCell(Text(rating.yearString)),
+            DataCell(Text(rating.ratingString)),
+            DataCell(Text(rating.ratingDateString)),
+            DataCell(IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () { removeRating(rating); }
+            ))
+          ]))
+              .toList()
+        )
+      )
+      /*Row(children: [Expanded(child:
         DataTable(
           columns: const [
             DataColumn(label: Text('Title')),
@@ -206,7 +232,7 @@ class _RatingsTableState extends State<RatingsTable> {
                   ]))
               .toList()
         )
-      )])))
+      )])))*/
     ]);
   }
 
