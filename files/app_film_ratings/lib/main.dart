@@ -238,14 +238,6 @@ class _RatingsTableState extends State<RatingsTable> {
     });
   }
 
-  // TODO: figure out why not calling
-  @override
-  void dispose() {
-    writeRatings(ratings).then((_) {
-      super.dispose();
-    });
-  }
-
   Future<File> writeRatings(List<Rating> ratings) async {
     final file = await _localFile;
     String data = Ratings.encode(ratings);
