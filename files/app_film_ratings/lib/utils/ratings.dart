@@ -4,9 +4,9 @@ import 'dart:convert';
 class Ratings {
   static final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
-  // TODO: make this write nicely, not just on one line
   static String encode(List<Rating> ratings) {
-    return jsonEncode(ratings);
+    JsonEncoder e = const JsonEncoder.withIndent(' ');
+    return e.convert(ratings);
   }
 
   static List<Rating> decode(String data) {
