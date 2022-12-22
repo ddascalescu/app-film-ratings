@@ -2,16 +2,20 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Local file storage for saved films
+ - Finish TODOs
  - Add picture to readme
  - Release versions, and update repo description with where to find
 
 Features:
  - Adding film ratings to a table
  - Removal from the table
+ - Persistent ratings storage in local file system
 
 Planned features:
+ - Add 'just seen' tickbox column, or dropdown with options like 'just seen', 'imdb import', 'changed mind'
  - Changing adding entries into a '+' button that brings up a box, involving the next point
+ - Make main table sortable by any column
+ - Make columns hidable
  - Searching through IMDb API for films (maybe storing them all in useful format? depends on format they appear in API and how easy retrieval is. cache may be nice for offline use)
  - Analytics
    - Numbers for specific film/director/actor/genre etc. (box with info)
@@ -25,6 +29,7 @@ Planned features:
      - number of times rating a year
  - Define custom analytics that the user wants to see often, display on main analytics screen
  - Settings
+   - Visual: light/dark theme
    - Changing granularity and scale of ratings - I.e. can set min, max, and step
  - 'date joined' value in 'about' section
    - can include as line in date-based charts, to distinguish between old and new rating systems
