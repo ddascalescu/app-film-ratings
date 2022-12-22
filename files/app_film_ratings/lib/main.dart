@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:path/path.dart' as p;
 
 import 'package:data_table_2/data_table_2.dart';
 
@@ -263,8 +264,7 @@ class _RatingsTableState extends State<RatingsTable> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    // TODO: make this OS-independent
-    return File('$path\\Film Ratings\\ratings.json').create(recursive: true);
+    return File(p.join(path, 'Film Ratings', 'ratings.json')).create(recursive: true);
   }
 }
 
