@@ -29,6 +29,7 @@ Planned features:
      - number of times rating a year
  - Define custom analytics that the user wants to see often, display on main analytics screen
  - Settings
+   - Visual: light/dark theme
    - Changing granularity and scale of ratings - I.e. can set min, max, and step
  - 'date joined' value in 'about' section
    - can include as line in date-based charts, to distinguish between old and new rating systems
