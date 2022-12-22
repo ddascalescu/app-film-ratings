@@ -7,8 +7,10 @@ import 'package:data_table_2/data_table_2.dart';
 
 import 'utils/ratings.dart';
 import 'formatters.dart';
+import 'indigo.dart';
 
 const String appTitle = 'Film Ratings';
+const double pad = 8.0;
 
 void main() => runApp(const App());
 
@@ -19,9 +21,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
         title: appTitle,
-        home: MainScreen()
+        theme: ThemeData(
+          primarySwatch: Indigo.swatch()
+        ),
+        home: const MainScreen()
     );
   }
 }
@@ -32,12 +37,10 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: make appbar indigo
       appBar: AppBar(
-        title: const Text(appTitle),
+        title: const Text(appTitle)
       ),
-      // TODO: make all paddings into a decorator
-      body: const Padding(padding: EdgeInsets.all(8.0),
+      body: const Padding(padding: EdgeInsets.all(pad),
           child: RatingsTable()
       )
     );
@@ -71,7 +74,7 @@ class _RatingsTableState extends State<RatingsTable> {
         children: [
           /* ENTRY: Film title */
           Expanded(
-            child: Padding(padding: const EdgeInsets.all(8.0),
+            child: Padding(padding: const EdgeInsets.all(pad),
               child: TextField(
                 controller: _textController,
                 decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
@@ -83,7 +86,7 @@ class _RatingsTableState extends State<RatingsTable> {
           SizedBox(
             width: 100.0,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(pad),
               child: TextField(
                 controller: _yearController,
                 textAlign: TextAlign.center,
@@ -98,7 +101,7 @@ class _RatingsTableState extends State<RatingsTable> {
           SizedBox(
             width: 50.0,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(pad),
               child: TextField(
                 controller: _numberController,
                 textAlign: TextAlign.center,
@@ -113,7 +116,7 @@ class _RatingsTableState extends State<RatingsTable> {
           SizedBox(
             width: 150.0,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(pad),
               child: TextField(
                 readOnly: true,
                 controller: TextEditingController(
@@ -142,7 +145,7 @@ class _RatingsTableState extends State<RatingsTable> {
 
           /* BUTTON: Add rating */
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(pad),
             child: ElevatedButton(
               child: const Text('Add'),
               onPressed: () { addRating(); }
