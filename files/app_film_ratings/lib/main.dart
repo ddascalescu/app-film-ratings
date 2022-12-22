@@ -59,8 +59,7 @@ class _RatingsTableState extends State<RatingsTable> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(children: [
+    return Column(children: [
       /* Entries row */
       Row(
         children: [
@@ -169,12 +168,10 @@ class _RatingsTableState extends State<RatingsTable> {
         ]
       ),
 
-      /* Data table */
-      // TODO: make title the only column that expands
-      // TODO: might not need this hack, maybe just row and expanded
-      Row(children: [Expanded(child: SingleChildScrollView( // hack to make DataTable fit width
-        scrollDirection: Axis.vertical,
-        child: DataTable(
+      /* Data table headers */
+      // TODO: make title the only column that expands (set widths of other columns, align)
+      Row(children: [Expanded(child:
+        DataTable(
           columns: const [
             DataColumn(label: Text('Title')),
             DataColumn(label: Text('Year')),
@@ -182,6 +179,20 @@ class _RatingsTableState extends State<RatingsTable> {
             DataColumn(label: Text('Date')),
             DataColumn(label: Text(''))
           ],
+          rows: const []
+        )
+      )]),
+      /* Data table items */
+      Expanded(child: SingleChildScrollView(child: Row(children: [Expanded(child:
+        DataTable(
+          columns: const [
+            DataColumn(label: Text('')),
+            DataColumn(label: Text('')),
+            DataColumn(label: Text('')),
+            DataColumn(label: Text('')),
+            DataColumn(label: Text(''))
+          ],
+          headingRowHeight: 0,
           rows: ratings
               .map((rating) => DataRow(cells: [
                     DataCell(Text(rating.filmTitle)),
@@ -195,9 +206,8 @@ class _RatingsTableState extends State<RatingsTable> {
                   ]))
               .toList()
         )
-      ))])
-    ])
-    );
+      )])))
+    ]);
   }
 
   void addRating(Rating rating) {
