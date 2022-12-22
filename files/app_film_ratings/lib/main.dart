@@ -172,7 +172,6 @@ class _RatingsTableState extends State<RatingsTable> {
       ),
 
       /* Data table headers */
-      // TODO: make title the only column that expands (set widths of other columns, align)
       Expanded(child:
         DataTable2(
           columns: const [
