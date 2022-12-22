@@ -2,7 +2,6 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Finish TODOs
  - Add picture to readme
  - Release versions, and update repo description with where to find
 
