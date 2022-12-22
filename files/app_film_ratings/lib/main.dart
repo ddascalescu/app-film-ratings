@@ -29,6 +29,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO: make appbar indigo
       appBar: AppBar(
         title: const Text(appTitle),
       ),
@@ -58,7 +59,8 @@ class _RatingsTableState extends State<RatingsTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return SingleChildScrollView(
+      child: Column(children: [
       /* Entries row */
       Row(
         children: [
@@ -169,7 +171,6 @@ class _RatingsTableState extends State<RatingsTable> {
 
       /* Data table */
       // TODO: make title the only column that expands
-      // TODO: make table vertically scrollable
       // TODO: might not need this hack, maybe just row and expanded
       Row(children: [Expanded(child: SingleChildScrollView( // hack to make DataTable fit width
         scrollDirection: Axis.vertical,
@@ -195,7 +196,8 @@ class _RatingsTableState extends State<RatingsTable> {
               .toList()
         )
       ))])
-    ]);
+    ])
+    );
   }
 
   void addRating(Rating rating) {
