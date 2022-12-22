@@ -57,6 +57,8 @@ class _RatingsTableState extends State<RatingsTable> {
 
   DateTime _selectedDate = DateTime.now();
 
+  int _submits = 0;
+
   final List<Rating> ratings = [];
 
   @override
@@ -113,7 +115,6 @@ class _RatingsTableState extends State<RatingsTable> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 readOnly: true,
-                // TODO: maybe make this not a controller?
                 controller: TextEditingController(
                   text: Ratings.dateFormat.format(_selectedDate),
                 ),
@@ -143,29 +144,7 @@ class _RatingsTableState extends State<RatingsTable> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               child: const Text('Add'),
-
-              onPressed: () {
-                // TODO: put into addItem method
-                if (_textController.text.isNotEmpty &&
-                    _numberController.text.isNotEmpty) {
-                  setState(() {
-                    Rating r = Rating(
-                        _textController.text,
-                        int.parse(_yearController.text),
-                        double.parse(_numberController.text),
-                        _selectedDate);
-                    addRating(r);
-
-                    _textController.clear();
-                    _yearController.clear();
-                    _numberController.clear();
-                    _selectedDate = DateTime.now();
-                  });
-                } else {
-                  // TODO: warn user that text is empty
-                }
-              }
-
+              onPressed: () { addRating(); }
             )
           )
         ]
@@ -198,10 +177,41 @@ class _RatingsTableState extends State<RatingsTable> {
     ]);
   }
 
-  void addRating(Rating rating) {
-    setState(() {
-      ratings.add(rating);
-    });
+  void addRating() {
+    if (_textController.text.isNotEmpty &&
+        _yearController.text.isNotEmpty &&
+        _numberController.text.isNotEmpty) {
+
+      Rating r = Rating(
+        _textController.text,
+        int.parse(_yearController.text),
+        double.parse(_numberController.text),
+        _selectedDate
+      );
+      setState(() {
+        ratings.add(r);
+
+        _textController.clear();
+        _yearController.clear();
+        _numberController.clear();
+        _selectedDate = DateTime.now();
+      });
+
+      _submits = 0;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Rating added'))
+      );
+    } else {
+      _submits++;
+      if (_submits == 3) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('All fields must be completed'))
+        );
+        _submits = 0;
+      }
+    }
+
     writeRatings(ratings);
   }
 
@@ -209,6 +219,11 @@ class _RatingsTableState extends State<RatingsTable> {
     setState(() {
       ratings.remove(rating);
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Rating deleted'))
+    );
+
     writeRatings(ratings);
   }
 

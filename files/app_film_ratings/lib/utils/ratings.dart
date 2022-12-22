@@ -23,6 +23,7 @@ class Ratings {
 
 class Rating {
   // TODO: if started caching films, change this to a corresponding filmID
+  // TODO: when added sorting, add ratingID and use as a default sort
   String filmTitle;
   int filmYear;
 
