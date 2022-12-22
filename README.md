@@ -2,7 +2,6 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Add 'just seen' tickbox column
  - Finish TODOs
  - Add picture to readme
  - Release versions, and update repo description with where to find
@@ -13,6 +12,7 @@ Features:
  - Persistent ratings storage in local file system
 
 Planned features:
+ - Add 'just seen' tickbox column, or dropdown with options like 'just seen', 'imdb import', 'changed mind'
  - Changing adding entries into a '+' button that brings up a box, involving the next point
  - Make main table sortable by any column
  - Make columns hidable
