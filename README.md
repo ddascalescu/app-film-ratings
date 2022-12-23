@@ -7,7 +7,6 @@ TODO (before V1 and public):
 
 Features:
  - Adding film ratings to a table
- - Removal from the table
  - Persistent ratings storage in local file system
 
 Planned features:
