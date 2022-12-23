@@ -11,7 +11,7 @@ Features:
  - Persistent ratings storage in local file system
 
 Planned features:
- - Add 'just seen' tickbox column, or dropdown with options like 'just seen', 'imdb import', 'changed mind'
+ - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
  - Changing adding entries into a '+' button that brings up a box, involving the next point
  - Make main table sortable by any column
  - Make columns hidable
