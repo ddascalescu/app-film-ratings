@@ -24,7 +24,7 @@ class App extends StatelessWidget {
     return MaterialApp(
         title: appTitle,
         theme: ThemeData(
-          primarySwatch: Indigo.swatch()
+          primarySwatch: Indigo.swatch
         ),
         home: const MainScreen()
     );
