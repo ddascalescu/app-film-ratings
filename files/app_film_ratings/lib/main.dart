@@ -85,7 +85,7 @@ class _RatingsTableState extends State<RatingsTable> {
         ]
       ),
 
-      /* Data table */
+      /* DATA TABLE */
       Expanded(child:
         DataTable2(
           columns: const [
@@ -119,11 +119,14 @@ class _RatingsTableState extends State<RatingsTable> {
           child: Builder(builder: (context) {
             return Scaffold(
               backgroundColor: Colors.transparent,
+              /* DIALOG: Add rating */
               body: Dialog(
                 child: Column(
                   children: [
+                    /* TEXT: Dialog title */
                     const Text('Film rating details'),
 
+                    /* ENTRY: Film title */
                     SizedBox(width: 300, child: Row(children: [SizedBox(
                       width: 300.0,
                       child: Padding(
@@ -136,6 +139,7 @@ class _RatingsTableState extends State<RatingsTable> {
                       )
                     )])),
 
+                    /* ENTRY: Film year */
                     SizedBox(width: 300, child: Row(children: [
                       const Padding(padding: EdgeInsets.all(pad*2),
                         child: Text('Year:')
@@ -153,6 +157,7 @@ class _RatingsTableState extends State<RatingsTable> {
                         )
                       )])),
 
+                    /* ENTRY: Rating */
                     SizedBox(width: 300, child: Row(children: [
                       const Padding(padding: EdgeInsets.all(pad*2),
                         child: Text('Rating:')
@@ -171,6 +176,7 @@ class _RatingsTableState extends State<RatingsTable> {
                       )
                     ])),
 
+                    /* ENTRY: Rating date */
                     SizedBox(width: 300, child: Row(children: [
                       const Padding(padding: EdgeInsets.all(pad*2),
                         child: Text('Rating date:')
@@ -205,6 +211,7 @@ class _RatingsTableState extends State<RatingsTable> {
                       )
                     ])),
 
+                    /* BUTTONS: Cancel and Add */
                     SizedBox(width: 300, child: Row(children: [
                       Padding(
                         padding: const EdgeInsets.all(pad),
@@ -213,7 +220,9 @@ class _RatingsTableState extends State<RatingsTable> {
                           onPressed: () { Navigator.pop(context); }
                         )
                       ),
+
                       const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
+
                       Padding(
                         padding: const EdgeInsets.all(pad),
                         child: ElevatedButton(
