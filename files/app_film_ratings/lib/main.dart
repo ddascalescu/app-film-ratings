@@ -71,79 +71,9 @@ class _RatingsTableState extends State<RatingsTable> {
   Widget build(BuildContext context) {
     // TODO: make minimum size for window (min size for certain widgets)
     return Column(children: [
-      /* Entries row */
+      /* Top row */
       Row(
         children: [
-          /* ENTRY: Film title */
-          /*Expanded(
-            child: Padding(padding: const EdgeInsets.all(pad),
-              child: TextField(
-                controller: _textController,
-              )
-            )
-          ),
-
-          /* ENTRY: Film year */
-          SizedBox(
-            width: 100.0,
-            child: Padding(
-              padding: const EdgeInsets.all(pad),
-              child: TextField(
-                controller: _yearController,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [YearInputFormatter()],
-                decoration: const InputDecoration(hintText: '1994')
-              )
-            )
-          ),
-
-          /* ENTRY: Rating */
-          SizedBox(
-            width: 50.0,
-            child: Padding(
-              padding: const EdgeInsets.all(pad),
-              child: TextField(
-                controller: _numberController,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [RatingInputFormatter()],
-                decoration: const InputDecoration(hintText: '8.5')
-              )
-            )
-          ),
-
-          /* ENTRY: Rating date */
-          SizedBox(
-            width: 150.0,
-            child: Padding(
-              padding: const EdgeInsets.all(pad),
-              child: TextField(
-                readOnly: true,
-                controller: TextEditingController(
-                  text: Ratings.dateFormat.format(_selectedDate),
-                ),
-                textAlign: TextAlign.center,
-
-                onTap: () async {
-                  final DateTime? picked = await showDatePicker(
-                    context: context,
-                    initialDate: _selectedDate,
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                  );
-
-                  if (picked != null && picked != _selectedDate) {
-                    setState(() {
-                      _selectedDate = picked;
-                    });
-                  }
-                }
-
-              )
-            )
-          ),*/
-
           /* BUTTON: Add rating */
           Padding(
             padding: const EdgeInsets.all(pad),
@@ -155,7 +85,7 @@ class _RatingsTableState extends State<RatingsTable> {
         ]
       ),
 
-      /* Data table headers */
+      /* Data table */
       Expanded(child:
         DataTable2(
           columns: const [
