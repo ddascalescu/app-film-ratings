@@ -184,119 +184,129 @@ class _RatingsTableState extends State<RatingsTable> {
 
   void showDetails() {
     showDialog(context: context,
-      builder: (BuildContext context) => Dialog(
-        child: Column(
-          children: [
-            const Text('Film rating details'),
+      builder: (context) {
+        return ScaffoldMessenger(
+          child: Builder(builder: (context) {
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Dialog(
+                child: Column(
+                  children: [
+                    const Text('Film rating details'),
 
-            SizedBox(width: 300, child: Row(children: [SizedBox(
-              width: 300.0,
-              child: Padding(
-                padding: const EdgeInsets.all(pad),
-                child: TextField(
-                  controller: _textController,
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
+                    SizedBox(width: 300, child: Row(children: [SizedBox(
+                      width: 300.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(pad),
+                        child: TextField(
+                          controller: _textController,
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
+                        )
+                      )
+                    )])),
+
+                    SizedBox(width: 300, child: Row(children: [
+                      const Padding(padding: EdgeInsets.all(pad*2),
+                        child: Text('Year:')
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(pad),
+                          child: TextField(
+                            controller: _yearController,
+                            textAlign: TextAlign.right,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [YearInputFormatter()],
+                            decoration: const InputDecoration(hintText: '1994')
+                          )
+                        )
+                      )])),
+
+                    SizedBox(width: 300, child: Row(children: [
+                      const Padding(padding: EdgeInsets.all(pad*2),
+                        child: Text('Rating:')
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(pad),
+                          child: TextField(
+                            controller: _numberController,
+                            textAlign: TextAlign.right,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [RatingInputFormatter()],
+                            decoration: const InputDecoration(hintText: '8.5')
+                          )
+                        )
+                      )
+                    ])),
+
+                    SizedBox(width: 300, child: Row(children: [
+                      const Padding(padding: EdgeInsets.all(pad*2),
+                        child: Text('Rating date:')
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(pad),
+                          child: TextField(
+                            readOnly: true,
+                            controller: TextEditingController(
+                              text: Ratings.dateFormat.format(_selectedDate),
+                            ),
+                            textAlign: TextAlign.right,
+
+                            onTap: () async {
+                              final DateTime? picked = await showDatePicker(
+                                context: context,
+                                initialDate: _selectedDate,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now(),
+                              );
+
+                              if (picked != null && picked != _selectedDate) {
+                                setState(() {
+                                  _selectedDate = picked;
+                                });
+                              }
+                            }
+
+                          )
+                        )
+                      )
+                    ])),
+
+                    SizedBox(width: 300, child: Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.all(pad),
+                        child: ElevatedButton(
+                          child: const Text('Cancel'),
+                          onPressed: () { Navigator.pop(context); }
+                        )
+                      ),
+                      const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
+                      Padding(
+                        padding: const EdgeInsets.all(pad),
+                        child: ElevatedButton(
+                          child: const Text('Add'),
+                          onPressed: () {
+                            if (addRating(context)) {
+                              Navigator.pop(context);
+                            }
+                          }
+                        )
+                      )
+                    ]))
+                  ]
                 )
               )
-            )])),
-
-            SizedBox(width: 300, child: Row(children: [
-              const Padding(padding: EdgeInsets.all(pad*2),
-                child: Text('Year:')
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(pad),
-                  child: TextField(
-                    controller: _yearController,
-                    textAlign: TextAlign.right,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [YearInputFormatter()],
-                    decoration: const InputDecoration(hintText: '1994')
-                  )
-                )
-            )])),
-
-            SizedBox(width: 300, child: Row(children: [
-              const Padding(padding: EdgeInsets.all(pad*2),
-                child: Text('Rating:')
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(pad),
-                  child: TextField(
-                    controller: _numberController,
-                    textAlign: TextAlign.right,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [RatingInputFormatter()],
-                    decoration: const InputDecoration(hintText: '8.5')
-                  )
-                )
-              )
-            ])),
-
-          SizedBox(width: 300, child: Row(children: [
-            const Padding(padding: EdgeInsets.all(pad*2),
-              child: Text('Rating date:')
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(pad),
-                child: TextField(
-                  readOnly: true,
-                  controller: TextEditingController(
-                    text: Ratings.dateFormat.format(_selectedDate),
-                  ),
-                  textAlign: TextAlign.right,
-
-                  onTap: () async {
-                    final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: _selectedDate,
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                    );
-
-                    if (picked != null && picked != _selectedDate) {
-                      setState(() {
-                        _selectedDate = picked;
-                      });
-                    }
-                  }
-
-                )
-              )
-            )
-          ])),
-
-          SizedBox(width: 300, child: Row(children: [
-            Padding(
-                padding: const EdgeInsets.all(pad),
-                child: ElevatedButton(
-                    child: const Text('Cancel'),
-                    onPressed: () { Navigator.pop(context); }
-                )
-            ),
-            const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
-            Padding(
-              padding: const EdgeInsets.all(pad),
-              child: ElevatedButton(
-                child: const Text('Add'),
-                onPressed: () {
-                  if (addRating()) {
-                    Navigator.pop(context);
-                  }
-                }
-              )
-            )
-          ]))
-        ])
-      )
+            );
+          })
+        );
+      }
     );
   }
 
-  bool addRating() {
+  bool addRating(BuildContext dialogContext) {
     if (_textController.text.isNotEmpty &&
         _yearController.text.isNotEmpty &&
         _numberController.text.isNotEmpty) {
@@ -308,7 +318,7 @@ class _RatingsTableState extends State<RatingsTable> {
         _selectedDate
       );
       if (r.filmYear < 1850) {
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(dialogContext).showSnackBar(
             const SnackBar(content: Text('Year must be greater than 1850'))
         );
         return false;
@@ -330,7 +340,7 @@ class _RatingsTableState extends State<RatingsTable> {
     } else {
       _submits++;
       if (_submits == 3) {
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(dialogContext).showSnackBar(
             const SnackBar(content: Text('All fields must be completed'))
         );
         _submits = 0;
