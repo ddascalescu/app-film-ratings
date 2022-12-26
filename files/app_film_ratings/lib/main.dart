@@ -24,7 +24,8 @@ class App extends StatelessWidget {
     return MaterialApp(
         title: appTitle,
         theme: ThemeData(
-          primarySwatch: Indigo.swatch()
+          primarySwatch: Indigo.swatch(),
+          brightness: Brightness.dark
         ),
         home: const MainScreen()
     );
@@ -38,7 +39,8 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(appTitle)
+        title: const Text(appTitle),
+        backgroundColor: Color(Indigo.indigo),
       ),
       body: const Padding(padding: EdgeInsets.all(pad),
           child: RatingsTable()
@@ -77,7 +79,6 @@ class _RatingsTableState extends State<RatingsTable> {
             child: Padding(padding: const EdgeInsets.all(pad),
               child: TextField(
                 controller: _textController,
-                decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
               )
             )
           ),
