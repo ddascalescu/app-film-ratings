@@ -14,7 +14,7 @@ class Indigo {
       600: Color.fromRGBO(53, 16, 145, 0.7),
       700: Color.fromRGBO(53, 16, 145, 0.8),
       800: Color.fromRGBO(53, 16, 145, 0.9),
-      900: Color.fromRGBO(53, 16, 145, 1),
+      900: Color.fromRGBO(53, 16, 145, 1)
     });
   }
 }
