@@ -3,7 +3,6 @@ A Flutter app for rating films
 
 TODO (before V1 and public):
  - Rearrange for all layouts
-   - Move adding list to new popup
  - Name app for each platform
  - Release versions, and update repo description with where to find
 
