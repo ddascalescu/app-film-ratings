@@ -7,7 +7,7 @@ TODO (before V1 and public):
    - Edit button?
  - Rearrange for all mobile layouts
  - Name app for mobile
- - Release versions, and update repo description with where to find
+ - Release versions, and update repo description with where to find, also update repo picture(s)
  - Repeat for any other platforms
 
 Features:
