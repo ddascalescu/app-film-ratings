@@ -2,6 +2,7 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
+ - Fix date picker bug, and change colour scheme in picker
  - Check layout for multiple mobile devices
  - Name app for mobile
  - Release versions, and update repo description with where to find, also update repo picture(s)
