@@ -113,6 +113,13 @@ class _RatingsTableState extends State<RatingsTable> {
     ]);
   }
 
+  void _resetFields() {
+    _textController.clear();
+    _yearController.clear();
+    _numberController.clear();
+    _selectedDate = DateTime.now();
+  }
+
   void _showDialogAdd() {
     // TODO: make this boilerplate into a class
     showDialog(context: context,
@@ -188,7 +195,6 @@ class _RatingsTableState extends State<RatingsTable> {
                                         padding: const EdgeInsets.all(pad),
                                         child: TextField(
                                             readOnly: true,
-                                            // TODO: BUG: does not update visually
                                             controller: TextEditingController(
                                               text: Ratings.dateFormat.format(_selectedDate),
                                             ),
@@ -204,7 +210,13 @@ class _RatingsTableState extends State<RatingsTable> {
 
                                               if (picked != null && picked != _selectedDate) {
                                                 setState(() {
+                                                  Navigator.pop(context); // This line...
                                                   _selectedDate = picked;
+                                                  _showDialogAdd(); // and this line...
+                                                  /* Is a hack to make the TextField update to
+                                                  * show the newly selected date, as it wasn't
+                                                  * before. It just closes and reopens the
+                                                  * dialog box without calling resetFields(). */
                                                 });
                                               }
                                             }
@@ -220,7 +232,12 @@ class _RatingsTableState extends State<RatingsTable> {
                                     padding: const EdgeInsets.all(pad),
                                     child: ElevatedButton(
                                         child: const Text('Cancel'),
-                                        onPressed: () { Navigator.pop(context); }
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          setState(() {
+                                            _resetFields();
+                                          });
+                                        }
                                     )
                                 ),
 
@@ -267,11 +284,7 @@ class _RatingsTableState extends State<RatingsTable> {
       }
       setState(() {
         ratings.add(r);
-
-        _textController.clear();
-        _yearController.clear();
-        _numberController.clear();
-        _selectedDate = DateTime.now();
+        _resetFields();
       });
 
       _submits = 0;
