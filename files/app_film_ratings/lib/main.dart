@@ -94,16 +94,16 @@ class _RatingsTableState extends State<RatingsTable> {
         columnSpacing: pad,
         columns: const [
           DataColumn(label: Text('Title')),
-          DataColumn2(label: Text('Year'), fixedWidth: 50),
+          DataColumn2(label: Text('Year'), fixedWidth: 60),
           DataColumn2(label: Text('Rating'), fixedWidth: 60),
-          DataColumn2(label: Text('Date'), fixedWidth: 90)
+          DataColumn2(label: Text('Date'), fixedWidth: 60)
         ],
         rows: ratings
             .map((rating) => DataRow(cells: [
           DataCell(Text(rating.filmTitle, overflow: TextOverflow.ellipsis)),
           DataCell(Text(rating.filmYearString)),
           DataCell(Text(rating.ratingString)),
-          DataCell(Text(rating.ratingDateString))
+          DataCell(Text(rating.ratingDateStringShort))
         ],
         onSelectChanged: (bool? selected) { _showDialogDetails(rating); }
         ))
@@ -188,6 +188,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                         padding: const EdgeInsets.all(pad),
                                         child: TextField(
                                             readOnly: true,
+                                            // TODO: BUG: does not update visually
                                             controller: TextEditingController(
                                               text: Ratings.dateFormat.format(_selectedDate),
                                             ),
