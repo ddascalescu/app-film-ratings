@@ -4,8 +4,10 @@ A Flutter app for rating films
 TODO (before V1 and public):
  - Make table rows clickable
    - Move delete button here
+   - Have full date here, and change main table to only show dec-12 or 2021 if older than current year
    - Edit button?
- - Rearrange for all mobile layouts
+ - Make film title ellipsis if too long (maybe? might look fine as multiline)
+ - Check layout for multiple mobile devices
  - Name app for mobile
  - Release versions, and update repo description with where to find, also update repo picture(s)
  - Repeat for any other platforms
