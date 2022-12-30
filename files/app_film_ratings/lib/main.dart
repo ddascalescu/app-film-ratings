@@ -99,7 +99,7 @@ class _RatingsTableState extends State<RatingsTable> {
         ],
         rows: ratings
             .map((rating) => DataRow(cells: [
-          DataCell(Text(rating.filmTitle)),
+          DataCell(Text(rating.filmTitle, overflow: TextOverflow.ellipsis)),
           DataCell(Text(rating.yearString)),
           DataCell(Text(rating.ratingString)),
           DataCell(Text(rating.ratingDateString)),
