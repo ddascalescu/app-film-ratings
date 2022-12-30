@@ -6,7 +6,6 @@ TODO (before V1 and public):
    - Move delete button here
    - Have full date here, and change main table to only show dec-12 or 2021 if older than current year
    - Edit button?
- - Make film title ellipsis if too long (maybe? might look fine as multiline)
  - Check layout for multiple mobile devices
  - Name app for mobile
  - Release versions, and update repo description with where to find, also update repo picture(s)
@@ -50,6 +49,7 @@ Planned features:
    - export chart PNGs
  - Anonymous user data sending - collate averages across all users, generate recommendations etc.
  - Automatically update hint in 'Add rating' box - maybe user suggestions?, if done the above point then maybe most popular of the week
+ - Make loading intro screen, showing logo
  
 #
 [Dan Dascalescu](https://github.com/ddascalescu)
