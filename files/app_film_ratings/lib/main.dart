@@ -32,6 +32,7 @@ class App extends StatelessWidget {
   }
 }
 
+// TODO: move this into MainScreen file, in screens folder
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -79,7 +80,7 @@ class _RatingsTableState extends State<RatingsTable> {
                 padding: const EdgeInsets.all(pad),
                 child: ElevatedButton(
                     child: const Text('Add rating...'),
-                    onPressed: () { _showDetails(); }
+                    onPressed: () { _showDialogAdd(); }
                 )
             )
           ]
@@ -88,33 +89,32 @@ class _RatingsTableState extends State<RatingsTable> {
       /* DATA TABLE */
       Expanded(child:
       DataTable2(
+        showCheckboxColumn: false,
         minWidth: 400,
         columnSpacing: pad,
         columns: const [
           DataColumn(label: Text('Title')),
           DataColumn2(label: Text('Year'), fixedWidth: 50),
           DataColumn2(label: Text('Rating'), fixedWidth: 60),
-          DataColumn2(label: Text('Date'), fixedWidth: 90),
-          DataColumn2(label: Text(''), fixedWidth: 30)
+          DataColumn2(label: Text('Date'), fixedWidth: 90)
         ],
         rows: ratings
             .map((rating) => DataRow(cells: [
           DataCell(Text(rating.filmTitle, overflow: TextOverflow.ellipsis)),
-          DataCell(Text(rating.yearString)),
+          DataCell(Text(rating.filmYearString)),
           DataCell(Text(rating.ratingString)),
-          DataCell(Text(rating.ratingDateString)),
-          DataCell(IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () { _removeRating(rating); }
-          ))
-        ]))
+          DataCell(Text(rating.ratingDateString))
+        ],
+        onSelectChanged: (bool? selected) { _showDialogDetails(rating); }
+        ))
             .toList()
       )
       )
     ]);
   }
 
-  void _showDetails() {
+  void _showDialogAdd() {
+    // TODO: make this boilerplate into a class
     showDialog(context: context,
         builder: (context) {
           return ScaffoldMessenger(
@@ -126,7 +126,7 @@ class _RatingsTableState extends State<RatingsTable> {
                         child: Column(
                             children: [
                               /* TEXT: Dialog title */
-                              const Text('Film rating details'),
+                              const Text('Add rating'),
 
                               /* ENTRY: Film title */
                               SizedBox(width: 300, child: Row(children: [SizedBox(
@@ -303,6 +303,124 @@ class _RatingsTableState extends State<RatingsTable> {
     );
 
     _writeRatings(ratings);
+  }
+
+  void _showDialogDetails(Rating rating) {
+    showDialog(context: context,
+        builder: (context) {
+          return ScaffoldMessenger(
+              child: Builder(builder: (context) {
+                return Scaffold(
+                    backgroundColor: Colors.transparent,
+                    /* DIALOG: Add rating */
+                    body: Dialog(
+                        child: Column(
+                            children: [
+                              /* TEXT: Dialog title */
+                              const Text('Rating details'),
+
+                              /* ENTRY: Film title */
+                              SizedBox(width: 300, child: Row(children: [SizedBox(
+                                  width: 300.0,
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(pad),
+                                      child: TextField(
+                                          readOnly: true,
+                                          controller: TextEditingController(
+                                            text: rating.filmTitle
+                                          ),
+                                          textAlign: TextAlign.center
+                                      )
+                                  )
+                              )])),
+
+                              /* ENTRY: Film year */
+                              SizedBox(width: 300, child: Row(children: [
+                                const Padding(padding: EdgeInsets.all(pad*2),
+                                    child: Text('Year:')
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(pad),
+                                        child: TextField(
+                                            readOnly: true,
+                                            controller: TextEditingController(
+                                              text: rating.filmYearString
+                                            ),
+                                            textAlign: TextAlign.right
+                                        )
+                                    )
+                                )])),
+
+                              /* ENTRY: Rating */
+                              SizedBox(width: 300, child: Row(children: [
+                                const Padding(padding: EdgeInsets.all(pad*2),
+                                    child: Text('Rating:')
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(pad),
+                                        child: TextField(
+                                            readOnly: true,
+                                            controller: TextEditingController(
+                                              text: rating.ratingString
+                                            ),
+                                            textAlign: TextAlign.right
+                                        )
+                                    )
+                                )
+                              ])),
+
+                              /* ENTRY: Rating date */
+                              SizedBox(width: 300, child: Row(children: [
+                                const Padding(padding: EdgeInsets.all(pad*2),
+                                    child: Text('Rating date:')
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(pad),
+                                        child: TextField(
+                                            readOnly: true,
+                                            controller: TextEditingController(
+                                              text: rating.ratingDateString,
+                                            ),
+                                            textAlign: TextAlign.right
+                                        )
+                                    )
+                                )
+                              ])),
+
+                              /* BUTTONS: Cancel and Add */
+                              SizedBox(width: 300, child: Row(children: [
+                                Padding(
+                                    padding: const EdgeInsets.all(pad),
+                                    child: ElevatedButton(
+                                        child: const Text('Return'),
+                                        onPressed: () { Navigator.pop(context); }
+                                    )
+                                ),
+
+                                const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
+
+                                Padding(
+                                    padding: const EdgeInsets.all(pad),
+                                    child: ElevatedButton(
+                                        child: const Text('Delete'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          _removeRating(rating);
+                                        }
+                                    )
+                                )
+                              ]))
+                            ]
+                        )
+                    )
+                );
+              })
+          );
+        }
+    );
   }
 
   @override
