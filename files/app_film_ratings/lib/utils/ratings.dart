@@ -34,7 +34,7 @@ class Rating {
     this.ratingDate = DateTime(ratingDate.year, ratingDate.month, ratingDate.day);
   }
 
-  String get yearString => filmYear.toString();
+  String get filmYearString => filmYear.toString();
   String get ratingString => rating.toStringAsFixed(1);
   String get ratingDateString => Ratings.dateFormat.format(ratingDate!);
 
