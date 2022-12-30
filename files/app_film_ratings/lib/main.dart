@@ -24,7 +24,8 @@ class App extends StatelessWidget {
     return MaterialApp(
         title: appTitle,
         theme: ThemeData(
-          primarySwatch: Indigo.swatch
+          primarySwatch: Indigo.swatch,
+          brightness: Brightness.dark
         ),
         home: const MainScreen()
     );
@@ -38,7 +39,8 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(appTitle)
+        title: const Text(appTitle),
+        backgroundColor: Color(Indigo.indigo),
       ),
       body: const Padding(padding: EdgeInsets.all(pad),
           child: RatingsTable()
@@ -69,94 +71,23 @@ class _RatingsTableState extends State<RatingsTable> {
   Widget build(BuildContext context) {
     // TODO: make minimum size for window (min size for certain widgets)
     return Column(children: [
-      /* Entries row */
+      /* Top row */
       Row(
-        children: [
-          /* ENTRY: Film title */
-          Expanded(
-            child: Padding(padding: const EdgeInsets.all(pad),
-              child: TextField(
-                controller: _textController,
-                decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
-              )
+          children: [
+            /* BUTTON: Add rating */
+            Padding(
+                padding: const EdgeInsets.all(pad),
+                child: ElevatedButton(
+                    child: const Text('Add rating...'),
+                    onPressed: () { showDetails(); }
+                )
             )
-          ),
-
-          /* ENTRY: Film year */
-          SizedBox(
-            width: 100.0,
-            child: Padding(
-              padding: const EdgeInsets.all(pad),
-              child: TextField(
-                controller: _yearController,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [YearInputFormatter()],
-                decoration: const InputDecoration(hintText: '1994')
-              )
-            )
-          ),
-
-          /* ENTRY: Rating */
-          SizedBox(
-            width: 50.0,
-            child: Padding(
-              padding: const EdgeInsets.all(pad),
-              child: TextField(
-                controller: _numberController,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [RatingInputFormatter()],
-                decoration: const InputDecoration(hintText: '8.5')
-              )
-            )
-          ),
-
-          /* ENTRY: Rating date */
-          SizedBox(
-            width: 150.0,
-            child: Padding(
-              padding: const EdgeInsets.all(pad),
-              child: TextField(
-                readOnly: true,
-                controller: TextEditingController(
-                  text: Ratings.dateFormat.format(_selectedDate),
-                ),
-                textAlign: TextAlign.center,
-
-                onTap: () async {
-                  final DateTime? picked = await showDatePicker(
-                    context: context,
-                    initialDate: _selectedDate,
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                  );
-
-                  if (picked != null && picked != _selectedDate) {
-                    setState(() {
-                      _selectedDate = picked;
-                    });
-                  }
-                }
-
-              )
-            )
-          ),
-
-          /* BUTTON: Add rating */
-          Padding(
-            padding: const EdgeInsets.all(pad),
-            child: ElevatedButton(
-              child: const Text('Add'),
-              onPressed: () { addRating(); }
-            )
-          )
-        ]
+          ]
       ),
 
-      /* Data table headers */
+      /* DATA TABLE */
       Expanded(child:
-        DataTable2(
+      DataTable2(
           columns: const [
             DataColumn(label: Text('Title')),
             DataColumn2(label: Text('Year'), fixedWidth: 100),
@@ -176,27 +107,160 @@ class _RatingsTableState extends State<RatingsTable> {
             ))
           ]))
               .toList()
-        )
+      )
       )
     ]);
   }
 
-  void addRating() {
+  void showDetails() {
+    showDialog(context: context,
+        builder: (context) {
+          return ScaffoldMessenger(
+              child: Builder(builder: (context) {
+                return Scaffold(
+                    backgroundColor: Colors.transparent,
+                    /* DIALOG: Add rating */
+                    body: Dialog(
+                        child: Column(
+                            children: [
+                              /* TEXT: Dialog title */
+                              const Text('Film rating details'),
+
+                              /* ENTRY: Film title */
+                              SizedBox(width: 300, child: Row(children: [SizedBox(
+                                  width: 300.0,
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(pad),
+                                      child: TextField(
+                                          controller: _textController,
+                                          textAlign: TextAlign.center,
+                                          decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
+                                      )
+                                  )
+                              )])),
+
+                              /* ENTRY: Film year */
+                              SizedBox(width: 300, child: Row(children: [
+                                const Padding(padding: EdgeInsets.all(pad*2),
+                                    child: Text('Year:')
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(pad),
+                                        child: TextField(
+                                            controller: _yearController,
+                                            textAlign: TextAlign.right,
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [YearInputFormatter()],
+                                            decoration: const InputDecoration(hintText: '1994')
+                                        )
+                                    )
+                                )])),
+
+                              /* ENTRY: Rating */
+                              SizedBox(width: 300, child: Row(children: [
+                                const Padding(padding: EdgeInsets.all(pad*2),
+                                    child: Text('Rating:')
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(pad),
+                                        child: TextField(
+                                            controller: _numberController,
+                                            textAlign: TextAlign.right,
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [RatingInputFormatter()],
+                                            decoration: const InputDecoration(hintText: '8.5')
+                                        )
+                                    )
+                                )
+                              ])),
+
+                              /* ENTRY: Rating date */
+                              SizedBox(width: 300, child: Row(children: [
+                                const Padding(padding: EdgeInsets.all(pad*2),
+                                    child: Text('Rating date:')
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(pad),
+                                        child: TextField(
+                                            readOnly: true,
+                                            controller: TextEditingController(
+                                              text: Ratings.dateFormat.format(_selectedDate),
+                                            ),
+                                            textAlign: TextAlign.right,
+
+                                            onTap: () async {
+                                              final DateTime? picked = await showDatePicker(
+                                                context: context,
+                                                initialDate: _selectedDate,
+                                                firstDate: DateTime(1900),
+                                                lastDate: DateTime.now(),
+                                              );
+
+                                              if (picked != null && picked != _selectedDate) {
+                                                setState(() {
+                                                  _selectedDate = picked;
+                                                });
+                                              }
+                                            }
+
+                                        )
+                                    )
+                                )
+                              ])),
+
+                              /* BUTTONS: Cancel and Add */
+                              SizedBox(width: 300, child: Row(children: [
+                                Padding(
+                                    padding: const EdgeInsets.all(pad),
+                                    child: ElevatedButton(
+                                        child: const Text('Cancel'),
+                                        onPressed: () { Navigator.pop(context); }
+                                    )
+                                ),
+
+                                const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
+
+                                Padding(
+                                    padding: const EdgeInsets.all(pad),
+                                    child: ElevatedButton(
+                                        child: const Text('Add'),
+                                        onPressed: () {
+                                          if (addRating(context)) {
+                                            Navigator.pop(context);
+                                          }
+                                        }
+                                    )
+                                )
+                              ]))
+                            ]
+                        )
+                    )
+                );
+              })
+          );
+        }
+    );
+  }
+
+  bool addRating(BuildContext dialogContext) {
     if (_textController.text.isNotEmpty &&
         _yearController.text.isNotEmpty &&
         _numberController.text.isNotEmpty) {
 
       Rating r = Rating(
-        _textController.text,
-        int.parse(_yearController.text),
-        double.parse(_numberController.text),
-        _selectedDate
+          _textController.text,
+          int.parse(_yearController.text),
+          double.parse(_numberController.text),
+          _selectedDate
       );
       if (r.filmYear < 1850) {
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(dialogContext).showSnackBar(
             const SnackBar(content: Text('Year must be greater than 1850'))
         );
-        return;
+        return false;
       }
       setState(() {
         ratings.add(r);
@@ -215,14 +279,16 @@ class _RatingsTableState extends State<RatingsTable> {
     } else {
       _submits++;
       if (_submits == 3) {
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(dialogContext).showSnackBar(
             const SnackBar(content: Text('All fields must be completed'))
         );
         _submits = 0;
       }
+      return false;
     }
 
     writeRatings(ratings);
+    return true;
   }
 
   void removeRating(Rating rating) {

@@ -2,12 +2,15 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Add picture to readme
+ - Rearrange for all layouts
+ - Name app for each platform
  - Release versions, and update repo description with where to find
 
 Features:
  - Adding film ratings to a table
  - Persistent ratings storage in local file system
+
+![Demo](../assets/assets/windows_main.png?raw=true)
 
 Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
