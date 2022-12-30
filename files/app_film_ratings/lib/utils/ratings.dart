@@ -39,7 +39,10 @@ class Rating {
   String get filmYearString => filmYear.toString();
   String get ratingString => rating.toStringAsFixed(1);
   String get ratingDateString => Ratings.dateFormat.format(ratingDate!);
-  String get ratingDateStringShort => (ratingDate!.isAfter(DateTime(DateTime.now().year))) ? Ratings._dateFormatShort.format(ratingDate!) : Ratings._dateFormatOnlyYear.format(ratingDate!);
+
+  String get ratingDateStringShort => (ratingDate!.isAfter(DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day))) ? Ratings._dateFormatShort.format(ratingDate!) : Ratings._dateFormatOnlyYear.format(ratingDate!);
+  /* ratingDateStringShort displays e.g. 04-Nov if date is within 1 year of
+      current date, otherwise displays just the year */
 
   @override
   String toString() {
