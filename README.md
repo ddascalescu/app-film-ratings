@@ -2,10 +2,7 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Make table rows clickable
-   - Move delete button here
-   - Have full date here, and change main table to only show dec-12 or 2021 if older than current year
-   - Edit button?
+ - Fix date picker bug, and change colour scheme in picker
  - Check layout for multiple mobile devices
  - Name app for mobile
  - Release versions, and update repo description with where to find, also update repo picture(s)
@@ -40,6 +37,7 @@ Planned features:
  - Define custom analytics that the user wants to see often, display on main analytics screen
  - Settings
    - Visual: light/dark theme
+   - Change between long-form and short-form of date in main table (some may want to see specific dates when sorting by date older than current year), maybe don't allow on devices where room is not sufficient
    - Changing granularity and scale of ratings - I.e. can set min, max, and step
  - 'date joined' value in 'about' section
    - can include as line in date-based charts, to distinguish between old and new rating systems
