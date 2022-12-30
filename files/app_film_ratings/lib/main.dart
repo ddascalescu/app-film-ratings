@@ -7,9 +7,10 @@ import 'package:data_table_2/data_table_2.dart';
 
 import 'utils/ratings.dart';
 import 'formatters.dart';
-import 'indigo.dart';
+import 'colors.dart';
 
 const String appTitle = 'Film Ratings';
+final AppTheme appTheme = AppThemeDark();
 const double pad = 8.0;
 
 void main() => runApp(const App());
@@ -23,10 +24,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: appTitle,
-        theme: ThemeData(
-          primarySwatch: Indigo.swatch,
-          brightness: Brightness.dark
-        ),
+        theme: appTheme.themeData(),
         home: const MainScreen()
     );
   }
@@ -206,6 +204,12 @@ class _RatingsTableState extends State<RatingsTable> {
                                                 initialDate: _selectedDate,
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime.now(),
+                                                builder: (BuildContext context, Widget? child) {
+                                                  return Theme(
+                                                    data: appTheme.themeDataPicker(),
+                                                    child: child!
+                                                  );
+                                                }
                                               );
 
                                               if (picked != null && picked != _selectedDate) {
@@ -213,10 +217,11 @@ class _RatingsTableState extends State<RatingsTable> {
                                                   Navigator.pop(context); // This line...
                                                   _selectedDate = picked;
                                                   _showDialogAdd(); // and this line...
-                                                  /* Is a hack to make the TextField update to
+                                                  /* ... is a hack to make the TextField update to
                                                   * show the newly selected date, as it wasn't
                                                   * before. It just closes and reopens the
                                                   * dialog box without calling resetFields(). */
+                                                  // TODO: find better fix, if reloading affects performance
                                                 });
                                               }
                                             }
