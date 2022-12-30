@@ -88,25 +88,26 @@ class _RatingsTableState extends State<RatingsTable> {
       /* DATA TABLE */
       Expanded(child:
       DataTable2(
-          columns: const [
-            DataColumn(label: Text('Title')),
-            DataColumn2(label: Text('Year'), fixedWidth: 100),
-            DataColumn2(label: Text('Rating'), fixedWidth: 100),
-            DataColumn2(label: Text('Date'), fixedWidth: 150),
-            DataColumn2(label: Text(''), fixedWidth: 75)
-          ],
-          rows: ratings
-              .map((rating) => DataRow(cells: [
-            DataCell(Text(rating.filmTitle)),
-            DataCell(Text(rating.yearString)),
-            DataCell(Text(rating.ratingString)),
-            DataCell(Text(rating.ratingDateString)),
-            DataCell(IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () { removeRating(rating); }
-            ))
-          ]))
-              .toList()
+        columnSpacing: 10,
+        columns: const [
+          DataColumn(label: Text('Title')),
+          DataColumn2(label: Text('Year'), fixedWidth: 50),
+          DataColumn2(label: Text('Rating'), fixedWidth: 60),
+          DataColumn2(label: Text('Date'), fixedWidth: 90),
+          DataColumn2(label: Text(''), fixedWidth: 30)
+        ],
+        rows: ratings
+            .map((rating) => DataRow(cells: [
+          DataCell(Text(rating.filmTitle)),
+          DataCell(Text(rating.yearString)),
+          DataCell(Text(rating.ratingString)),
+          DataCell(Text(rating.ratingDateString)),
+          DataCell(IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () { removeRating(rating); }
+          ))
+        ]))
+            .toList()
       )
       )
     ]);
