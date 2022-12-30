@@ -2,9 +2,13 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
- - Rearrange for all layouts
- - Name app for each platform
+ - Make table rows clickable
+   - Move delete button here
+   - Edit button?
+ - Rearrange for all mobile layouts
+ - Name app for mobile
  - Release versions, and update repo description with where to find
+ - Repeat for any other platforms
 
 Features:
  - Adding film ratings to a table
