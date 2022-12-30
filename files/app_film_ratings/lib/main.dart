@@ -105,7 +105,7 @@ class _RatingsTableState extends State<RatingsTable> {
           DataCell(Text(rating.ratingDateString)),
           DataCell(IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () { removeRating(rating); }
+              onPressed: () { _removeRating(rating); }
           ))
         ]))
             .toList()
@@ -230,7 +230,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                     child: ElevatedButton(
                                         child: const Text('Add'),
                                         onPressed: () {
-                                          if (addRating(context)) {
+                                          if (_addRating(context)) {
                                             Navigator.pop(context);
                                           }
                                         }
@@ -247,7 +247,7 @@ class _RatingsTableState extends State<RatingsTable> {
     );
   }
 
-  bool addRating(BuildContext dialogContext) {
+  bool _addRating(BuildContext dialogContext) {
     if (_textController.text.isNotEmpty &&
         _yearController.text.isNotEmpty &&
         _numberController.text.isNotEmpty) {
@@ -289,11 +289,11 @@ class _RatingsTableState extends State<RatingsTable> {
       return false;
     }
 
-    writeRatings(ratings);
+    _writeRatings(ratings);
     return true;
   }
 
-  void removeRating(Rating rating) {
+  void _removeRating(Rating rating) {
     setState(() {
       ratings.remove(rating);
     });
@@ -302,26 +302,26 @@ class _RatingsTableState extends State<RatingsTable> {
         const SnackBar(content: Text('Rating deleted'))
     );
 
-    writeRatings(ratings);
+    _writeRatings(ratings);
   }
 
   @override
   void initState() {
     super.initState();
-    readRatings().then((ratings) {
+    _readRatings().then((ratings) {
       setState(() {
         this.ratings.addAll(ratings);
       });
     });
   }
 
-  Future<File> writeRatings(List<Rating> ratings) async {
+  Future<File> _writeRatings(List<Rating> ratings) async {
     final file = await _localFile;
     String data = Ratings.encode(ratings);
     return file.writeAsString(data);
   }
 
-  Future<List<Rating>> readRatings() async {
+  Future<List<Rating>> _readRatings() async {
     try {
       final file = await _localFile;
       String data = await file.readAsString();
