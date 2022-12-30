@@ -79,7 +79,7 @@ class _RatingsTableState extends State<RatingsTable> {
                 padding: const EdgeInsets.all(pad),
                 child: ElevatedButton(
                     child: const Text('Add rating...'),
-                    onPressed: () { showDetails(); }
+                    onPressed: () { _showDetails(); }
                 )
             )
           ]
@@ -114,7 +114,7 @@ class _RatingsTableState extends State<RatingsTable> {
     ]);
   }
 
-  void showDetails() {
+  void _showDetails() {
     showDialog(context: context,
         builder: (context) {
           return ScaffoldMessenger(
