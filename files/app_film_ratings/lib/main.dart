@@ -231,7 +231,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                     child: ElevatedButton(
                                         child: const Text('Add'),
                                         onPressed: () {
-                                          if (_addRating(context)) {
+                                          if (_tryAddRating(context)) {
                                             Navigator.pop(context);
                                           }
                                         }
@@ -248,7 +248,7 @@ class _RatingsTableState extends State<RatingsTable> {
     );
   }
 
-  bool _addRating(BuildContext dialogContext) {
+  bool _tryAddRating(BuildContext dialogContext) {
     if (_textController.text.isNotEmpty &&
         _yearController.text.isNotEmpty &&
         _numberController.text.isNotEmpty) {
