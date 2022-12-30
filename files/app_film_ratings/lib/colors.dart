@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Indigo {
-  static int indigo = 0xFF351091;
+  static int value = 0xFF351091;
 
-  static MaterialColor swatch = MaterialColor(indigo, const <int, Color>{
+  static Color color = Color(value);
+
+  static MaterialColor swatch = MaterialColor(value, const <int, Color>{
     50: Color.fromRGBO(53, 16, 145, 0.1),
     100: Color.fromRGBO(53, 16, 145, 0.2),
     200: Color.fromRGBO(53, 16, 145, 0.3),
@@ -35,7 +37,7 @@ class AppThemeDark implements AppTheme {
   ThemeData themeDataPicker() {
     return themeData().copyWith(
       colorScheme: ColorScheme.light(
-        primary: Color(Indigo.indigo),
+        primary: Indigo.color,
         onSurface: Colors.white
       ),
       textButtonTheme: TextButtonThemeData(
@@ -61,7 +63,7 @@ class AppThemeLight implements AppTheme {
     return themeData().copyWith(
         textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
-                foregroundColor: Color(Indigo.indigo)
+                foregroundColor: Indigo.color
             )
         )
     );

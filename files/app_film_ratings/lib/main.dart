@@ -39,7 +39,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(appTitle),
-        backgroundColor: Color(Indigo.indigo),
+        backgroundColor: Indigo.color,
       ),
       body: const Padding(padding: EdgeInsets.all(pad),
           child: RatingsTable()
