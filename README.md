@@ -11,6 +11,10 @@ TODO (before V1 and public):
  - Name app for mobile
  - Release versions, and update repo description with where to find, also update repo picture(s)
  - Repeat for any other platforms
+ - Include indigo somewhere in app
+   - Maybe far right of app bar, maybe as logo
+   - Maybe also change font to match logo
+   - Maybe make lowercase to match logo
 
 Features:
  - Adding film ratings to a table
