@@ -88,7 +88,7 @@ class _RatingsTableState extends State<RatingsTable> {
       /* DATA TABLE */
       Expanded(child:
       DataTable2(
-        columnSpacing: 10,
+        columnSpacing: pad,
         columns: const [
           DataColumn(label: Text('Title')),
           DataColumn2(label: Text('Year'), fixedWidth: 50),
