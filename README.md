@@ -1,6 +1,10 @@
 # Film ratings app
 A Flutter app for rating films
 
+Current releases:
+ - Android: (Pre-release) 0.1.0 - Google Play internal testing, link available on request
+ - Windows: (Pre-release) [0.1.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/0.1.0)
+
 Features:
  - Adding film ratings to a table
  - Persistent ratings storage in local file system
