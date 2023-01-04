@@ -2,14 +2,18 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
+ - Make 'add' warning come up every click
  - Check layout for multiple mobile devices
- - Name app for mobile
- - Release versions, and update repo description with where to find, also update repo picture(s)
- - Repeat for any other platforms
+   - Reduce outside padding of table
+   - Make title column scale to size of screen
+ - Name app for all platforms
+ - Maybe make app icon circle?
+ - Make intro screen have full app logo?
  - Include indigo somewhere in app
    - Maybe far right of app bar, maybe as logo
    - Maybe also change font to match logo
    - Maybe make lowercase to match logo
+ - Update repo pictures
 
 Features:
  - Adding film ratings to a table
