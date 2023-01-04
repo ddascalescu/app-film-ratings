@@ -16,6 +16,8 @@ Mobile examples:
 <img src="../assets/assets/xperia_dialog_add.png?raw=true" width="250">
 <img src="../assets/assets/xperia_dialog_details.png?raw=true" width="250">
 
+#
+
 In progress (active): Version 0.1.1:
  - Small layout/design edits
  - Fixing any issues arising from 0.1.0 testing
