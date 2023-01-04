@@ -1,5 +1,5 @@
 # Film ratings app
-A Flutter app for rating films
+A Flutter app for rating films and data analysis.
 
 Versions:
  - Android: (Pre-release) 0.1.0 - Google Play internal testing, link available on request
