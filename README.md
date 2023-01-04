@@ -1,7 +1,7 @@
 # Film ratings app
 A Flutter app for rating films
 
-Current releases:
+Versions:
  - Android: (Pre-release) 0.1.0 - Google Play internal testing, link available on request
  - Windows: (Pre-release) [0.1.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/0.1.0)
 
@@ -15,6 +15,11 @@ Mobile examples:
 <img src="../assets/assets/xperia_main.png?raw=true" width="250">
 <img src="../assets/assets/xperia_dialog_add.png?raw=true" width="250">
 <img src="../assets/assets/xperia_dialog_details.png?raw=true" width="250">
+
+In progress (active): Version 0.1.1:
+ - Small layout/design edits
+ - Fixing any issues arising from 0.1.0 testing
+ - Releasing on iOS
 
 Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
