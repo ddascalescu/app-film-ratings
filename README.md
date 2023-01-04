@@ -41,8 +41,10 @@ Planned features:
    - Visual: light/dark theme
    - Change between long-form and short-form of date in main table (some may want to see specific dates when sorting by date older than current year), maybe don't allow on devices where room is not sufficient
    - Changing granularity and scale of ratings - I.e. can set min, max, and step
- - 'date joined' value in 'about' section
-   - can include as line in date-based charts, to distinguish between old and new rating systems
+   - Info/about
+     - Version name/number
+     - 'date joined' value
+       - can include as line in date-based charts, to distinguish between old and new rating systems
  - Syncing save files between devices - maybe gdrive?
  - Exporting data
    - json, csv, etc.
