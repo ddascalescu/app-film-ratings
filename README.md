@@ -2,6 +2,7 @@
 A Flutter app for rating films
 
 TODO (before V1 and public):
+ - Make 'add' warning come up every click
  - Check layout for multiple mobile devices
    - Reduce outside padding of table
    - Make title column scale to size of screen
