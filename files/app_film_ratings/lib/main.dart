@@ -10,7 +10,7 @@ import 'formatters.dart';
 import 'colors.dart';
 
 const String appTitle = 'Film Ratings';
-final AppTheme appTheme = AppThemeDark();
+final AppTheme appTheme = AppThemeDark(); // TODO: maybe move this into a settings .txt or .config file?
 const double pad = 8.0;
 
 void main() => runApp(const App());
@@ -61,8 +61,6 @@ class _RatingsTableState extends State<RatingsTable> {
   final _yearController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
-
-  int _submits = 0;
 
   final List<Rating> ratings = [];
 
@@ -292,19 +290,13 @@ class _RatingsTableState extends State<RatingsTable> {
         _resetFields();
       });
 
-      _submits = 0;
-
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Rating added'))
       );
     } else {
-      _submits++;
-      if (_submits == 3) {
-        ScaffoldMessenger.of(dialogContext).showSnackBar(
-            const SnackBar(content: Text('All fields must be completed'))
-        );
-        _submits = 0;
-      }
+      ScaffoldMessenger.of(dialogContext).showSnackBar(
+          const SnackBar(content: Text('All fields must be completed'))
+      );
       return false;
     }
 
