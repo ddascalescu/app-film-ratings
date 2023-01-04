@@ -5,7 +5,12 @@ Features:
  - Adding film ratings to a table
  - Persistent ratings storage in local file system
 
-![Demo](../assets/assets/windows_main.png?raw=true)
+Windows example:  
+<img src="../assets/assets/windows_main.png?raw=true" width="900">  
+Mobile examples:  
+<img src="../assets/assets/xperia_main.png?raw=true" width="300">
+<img src="../assets/assets/xperia_dialog_add.png?raw=true" width="300">
+<img src="../assets/assets/xperia_dialog_details.png?raw=true" width="300">
 
 Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
