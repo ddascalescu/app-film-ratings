@@ -6,11 +6,11 @@ Features:
  - Persistent ratings storage in local file system
 
 Windows example:  
-<img src="../assets/assets/windows_main.png?raw=true" width="900">  
+<img src="../assets/assets/windows_main.png?raw=true" width="600">  
 Mobile examples:  
-<img src="../assets/assets/xperia_main.png?raw=true" width="300">
-<img src="../assets/assets/xperia_dialog_add.png?raw=true" width="300">
-<img src="../assets/assets/xperia_dialog_details.png?raw=true" width="300">
+<img src="../assets/assets/xperia_main.png?raw=true" width="200">
+<img src="../assets/assets/xperia_dialog_add.png?raw=true" width="200">
+<img src="../assets/assets/xperia_dialog_details.png?raw=true" width="200">
 
 Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
