@@ -54,6 +54,7 @@ Planned features:
  - Anonymous user data sending - collate averages across all users, generate recommendations etc.
  - Automatically update hint in 'Add rating' box - maybe user suggestions?, if done the above point then maybe most popular of the week
  - Make loading intro screen, showing logo
+ - Voice input
  
 #
 [Dan Dascalescu](https://github.com/ddascalescu)
