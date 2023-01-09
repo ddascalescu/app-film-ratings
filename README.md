@@ -18,7 +18,7 @@ Mobile examples:
 
 #
 
-In progress (active): Version 0.1.1:
+In progress (on hold since Jan 4): Version 0.1.1:
  - Small layout/design edits
  - Fixing any issues arising from 0.1.0 testing
  - Releasing on iOS
