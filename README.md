@@ -1,7 +1,7 @@
 # Film ratings app
-A Flutter app for rating films
+A Flutter app for rating films and data visualization.
 
-Current releases:
+Versions:
  - Android: (Pre-release) 0.1.0 - Google Play internal testing, link available on request
  - Windows: (Pre-release) [0.1.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/0.1.0)
 
@@ -16,9 +16,15 @@ Mobile examples:
 <img src="../assets/assets/xperia_dialog_add.png?raw=true" width="250">
 <img src="../assets/assets/xperia_dialog_details.png?raw=true" width="250">
 
+#
+
+In progress (on hold since Jan 4): Version 0.1.1:
+ - Small layout/design edits
+ - Fixing any issues arising from 0.1.0 testing
+ - Releasing on iOS
+
 Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
- - Changing adding entries into a '+' button that brings up a box, involving the next point
  - Make main table sortable by any column
  - Make columns hidable
  - Searching through IMDb API for films (maybe storing them all in useful format? depends on format they appear in API and how easy retrieval is. cache may be nice for offline use)
@@ -48,6 +54,7 @@ Planned features:
  - Anonymous user data sending - collate averages across all users, generate recommendations etc.
  - Automatically update hint in 'Add rating' box - maybe user suggestions?, if done the above point then maybe most popular of the week
  - Make loading intro screen, showing logo
+ - Voice input
  
 #
 [Dan Dascalescu](https://github.com/ddascalescu)
