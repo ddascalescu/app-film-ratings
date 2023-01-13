@@ -23,6 +23,8 @@ In progress (on hold since Jan 4): Version 0.1.1:
  - Fixing any issues arising from 0.1.0 testing
  - Releasing on iOS
 
+[Full changelog](https://github.com/ddascalescu/app-film-ratings/blob/main/changelog.txt)
+
 Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
  - Make main table sortable by any column
