@@ -1,0 +1,26 @@
+0.1.1 - fixing layout/design
+ - Check layout for multiple mobile devices
+   - Reduce outside padding of table
+   - Make title column scale to size of screen
+ - Name app for all platforms
+ - Maybe make app icon circle?
+ - Make intro screen have full app logo?
+ - Include indigo somewhere in app
+   - Maybe far right of app bar, maybe as logo
+   - Maybe also change font to match logo
+   - Maybe make lowercase to match logo
+ - Release on iOS
+
+0.2.0 - data
+ - Add dropdowns
+ - Add rating ID
+
+0.3.0 - saving/syncing data
+ - Import/export
+ - Gdrive
+
+0.4.0 - imdb
+
+0.5.0 - analytics
+
+0.6.0 - settings
