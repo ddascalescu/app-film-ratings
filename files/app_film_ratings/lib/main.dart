@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:data_table_2/data_table_2.dart';
 
@@ -38,7 +39,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(appTitle),
+        title: Text(appTitle.toLowerCase(),
+          style: GoogleFonts.getFont('Inter')
+        ),
         backgroundColor: Indigo.color,
       ),
       body: const Padding(padding: EdgeInsets.all(pad),
