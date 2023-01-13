@@ -1,8 +1,19 @@
+===== COMPLETED =====
+
+0.1.0 - First version
+ - Main table with film title, year, rating, date
+ - 'Add rating' button that brings up dialog for details
+ - Delete button
+ - Saving/loading data locally as JSON file
+
+0.1.1 - Layout/design edits
+ - Made table items clickable, brings up details
+   - Moved delete button here
+ - Changed table date format to be smaller
+
+===== PLANNED =====
+
 0.1.1 - fixing layout/design
- - Check layout for multiple mobile devices
-   - Reduce outside padding of table
-   - Make title column scale to size of screen
- - Name app for all platforms
  - Maybe make app icon circle?
  - Make intro screen have full app logo?
  - Include indigo somewhere in app
@@ -26,3 +37,6 @@
 
 1.0.0 - full
  - all platforms (Apple development requires investment)
+
+? - implement at some point
+ - Reduce outside padding of table
