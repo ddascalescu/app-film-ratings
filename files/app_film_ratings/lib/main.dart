@@ -43,6 +43,12 @@ class MainScreen extends StatelessWidget {
           style: GoogleFonts.getFont('Inter')
         ),
         backgroundColor: Indigo.color,
+        actions: [
+          Padding(padding: const EdgeInsets.all(0),
+            child: Image.asset('assets/icons/indigo.png'),
+          ),
+          const Padding(padding: EdgeInsets.all(pad))
+        ]
       ),
       body: const Padding(padding: EdgeInsets.all(pad),
           child: RatingsTable()

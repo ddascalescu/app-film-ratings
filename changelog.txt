@@ -10,12 +10,10 @@
  - Made table items clickable, brings up details
    - Moved delete button here
  - Changed table date format to be smaller
+ - Added Inter font, using in appbar
+ - Added Indigo logo in appbar
 
 ===== PLANNED =====
-
-0.1.1 - fixing layout/design
- - Include indigo somewhere in app
-   - Maybe far right of app bar, maybe as logo
 
 0.2.0 - data
  - Add dropdowns

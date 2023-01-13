@@ -22,8 +22,7 @@ Mobile examples:
 
 #
 
-In progress (on hold since Jan 4): Version 0.1.1:
- - Small layout/design edits
+In progress (active): Version 0.1.1:
  - Fixing any issues arising from 0.1.0 testing
 
 [Full changelog](https://github.com/ddascalescu/app-film-ratings/blob/main/changelog.txt)
