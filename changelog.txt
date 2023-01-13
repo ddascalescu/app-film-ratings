@@ -14,7 +14,6 @@
 ===== PLANNED =====
 
 0.1.1 - fixing layout/design
- - Maybe make app icon circle?
  - Make intro screen have full app logo?
  - Include indigo somewhere in app
    - Maybe far right of app bar, maybe as logo
@@ -40,3 +39,4 @@
 
 ? - implement at some point
  - Reduce outside padding of table
+ - Maybe make app icon circle?
