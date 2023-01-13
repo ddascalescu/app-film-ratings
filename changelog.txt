@@ -9,7 +9,6 @@
    - Maybe far right of app bar, maybe as logo
    - Maybe also change font to match logo
    - Maybe make lowercase to match logo
- - Release on iOS
 
 0.2.0 - data
  - Add dropdowns
@@ -24,3 +23,6 @@
 0.5.0 - analytics
 
 0.6.0 - settings
+
+1.0.0 - full
+ - all platforms (Apple development requires investment)
