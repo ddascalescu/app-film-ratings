@@ -3,10 +3,11 @@ A Flutter app for rating films and data visualization.
 
 Versions:
  - Android: (Pre-release) 0.1.0 - Google Play internal testing, link available on request
+ - iOS: Requires investment of Apple Development program subscription
  - Windows: (Pre-release) [0.1.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/0.1.0)
- - iOS/macOS: Requires investment of Apple Development program subscription
  - Web: Not yet released
  - Linux: Not yet released
+ - macOS: Not yet released
 
 Features:
  - Adding film ratings to a table
