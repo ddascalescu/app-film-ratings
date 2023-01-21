@@ -1,5 +1,8 @@
 # Batch files for windows
 /.batch/
 
+# Files for creating release bundles
+/.release/
+
 # TODO list
 /todo.txt
