@@ -32,11 +32,12 @@
 1.0.0 - full
  - all platforms (Apple development requires investment)
 
-PLAN - implement at some point
+PLAN - (non-urgent) implement at some point
  - Reduce outside padding of table
  -? Make app icon circle
  - Make intro/splash screen
  -? Change font of rest of app
+ -? Have something show when logo is clicked
 
 BUGS - (non-urgent) fix at some point
  - Date picker selection requires reloading of dialog box
