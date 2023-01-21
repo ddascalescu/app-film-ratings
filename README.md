@@ -31,6 +31,7 @@ Planned features:
  - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
  - Make main table sortable by any column
  - Make columns hideable
+ - More rating criteria
  - Searching through IMDb API for films (maybe storing them all in useful format? depends on format they appear in API and how easy retrieval is. cache may be nice for offline use)
  - Analytics
    - Numbers for specific film/director/actor/genre etc. (box with info)
