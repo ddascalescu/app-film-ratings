@@ -42,13 +42,15 @@ class MainScreen extends StatelessWidget {
         ),
         backgroundColor: Indigo.color,
         actions: [
-          Padding(padding: const EdgeInsets.all(0),
+          PaddingAll(
+            padding: 0,
             child: Image.asset('assets/icons/indigo.png'),
           ),
-          const Padding(padding: EdgeInsets.all(pad))
+          const PaddingAll(padding: pad)
         ]
       ),
-      body: const Padding(padding: EdgeInsets.all(pad),
+      body: const PaddingAll(
+          padding: pad,
           child: RatingsTable()
       )
     );
@@ -79,8 +81,8 @@ class _RatingsTableState extends State<RatingsTable> {
       Row(
           children: [
             /* BUTTON: Add rating */
-            Padding(
-                padding: const EdgeInsets.all(pad),
+            PaddingAll(
+                padding: pad,
                 child: ElevatedButton(
                     child: const Text('Add rating...'),
                     onPressed: () { _showDialogAdd(); }
@@ -140,17 +142,12 @@ class _RatingsTableState extends State<RatingsTable> {
 
                               // TODO: make these into a class
                               /* ENTRY: Film title */
-                              SizedBox(width: dialogInnerWidth, child: Row(children: [SizedBox(
-                                  width: dialogInnerWidth,
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(pad),
-                                      child: TextField(
-                                          controller: _textController,
-                                          textAlign: TextAlign.center,
-                                          decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
-                                      )
-                                  )
-                              )])),
+                              InputRow(
+                                  child: TextField(
+                                      controller: _textController,
+                                      textAlign: TextAlign.center,
+                                      decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
+                              )),
 
                               /* ENTRY: Film year */
                               InputRow(
@@ -215,9 +212,9 @@ class _RatingsTableState extends State<RatingsTable> {
                               )),
 
                               /* BUTTONS: Cancel and Add */
-                              SizedBox(width: 250, child: Row(children: [
-                                Padding(
-                                    padding: const EdgeInsets.all(pad),
+                              SizedBox(width: dialogInnerWidth, child: Row(children: [
+                                PaddingAll(
+                                    padding: pad,
                                     child: ElevatedButton(
                                         child: const Text('Cancel'),
                                         onPressed: () {
@@ -229,10 +226,10 @@ class _RatingsTableState extends State<RatingsTable> {
                                     )
                                 ),
 
-                                const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
+                                const Expanded(child: PaddingAll(padding: pad*2, child: Text(''))),
 
-                                Padding(
-                                    padding: const EdgeInsets.all(pad),
+                                PaddingAll(
+                                    padding: pad,
                                     child: ElevatedButton(
                                         child: const Text('Add'),
                                         onPressed: () {
@@ -316,90 +313,62 @@ class _RatingsTableState extends State<RatingsTable> {
                               const Text('Rating details'),
 
                               /* ENTRY: Film title */
-                              SizedBox(width: 250, child: Row(children: [SizedBox(
-                                  width: 250.0, // TODO: this too
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(pad),
-                                      child: TextField(
-                                          readOnly: true,
-                                          controller: TextEditingController(
-                                            text: rating.filmTitle
-                                          ),
-                                          textAlign: TextAlign.center
-                                      )
-                                  )
-                              )])),
+                              InputRow(
+                                  child: TextField(
+                                      readOnly: true,
+                                      controller: TextEditingController(
+                                          text: rating.filmTitle
+                                      ),
+                                      textAlign: TextAlign.center
+                              )),
 
                               /* ENTRY: Film year */
-                              SizedBox(width: 250, child: Row(children: [
-                                const Padding(padding: EdgeInsets.all(pad*2),
-                                    child: Text('Year:')
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(pad),
-                                        child: TextField(
-                                            readOnly: true,
-                                            controller: TextEditingController(
-                                              text: rating.filmYearString
-                                            ),
-                                            textAlign: TextAlign.right
-                                        )
-                                    )
-                                )])),
+                              InputRow(
+                                prompt: "Year:",
+                                child: TextField(
+                                    readOnly: true,
+                                    controller: TextEditingController(
+                                        text: rating.filmYearString
+                                    ),
+                                    textAlign: TextAlign.right
+                              )),
 
                               /* ENTRY: Rating */
-                              SizedBox(width: 250, child: Row(children: [
-                                const Padding(padding: EdgeInsets.all(pad*2),
-                                    child: Text('Rating:')
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(pad),
-                                        child: TextField(
-                                            readOnly: true,
-                                            controller: TextEditingController(
-                                              text: rating.ratingString
-                                            ),
-                                            textAlign: TextAlign.right
-                                        )
-                                    )
-                                )
-                              ])),
+                              InputRow(
+                                prompt: "Rating:",
+                                child: TextField(
+                                    readOnly: true,
+                                    controller: TextEditingController(
+                                        text: rating.ratingString
+                                    ),
+                                    textAlign: TextAlign.right
+                              )),
 
                               /* ENTRY: Rating date */
-                              SizedBox(width: 250, child: Row(children: [
-                                const Padding(padding: EdgeInsets.all(pad*2),
-                                    child: Text('Rating date:')
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(pad),
-                                        child: TextField(
-                                            readOnly: true,
-                                            controller: TextEditingController(
-                                              text: rating.ratingDateString,
-                                            ),
-                                            textAlign: TextAlign.right
-                                        )
-                                    )
-                                )
-                              ])),
+                              InputRow(
+                                prompt: "Rating date:",
+                                child: TextField(
+                                    readOnly: true,
+                                    controller: TextEditingController(
+                                      text: rating.ratingDateString,
+                                    ),
+                                    textAlign: TextAlign.right
+                              )),
 
                               /* BUTTONS: Cancel and Add */
-                              SizedBox(width: 250, child: Row(children: [
-                                Padding(
-                                    padding: const EdgeInsets.all(pad),
+                              SizedBox(width: dialogInnerWidth, child: Row(children: [
+                                PaddingAll(
+                                    padding: pad,
                                     child: ElevatedButton(
                                         child: const Text('Return'),
                                         onPressed: () { Navigator.pop(context); }
                                     )
                                 ),
 
-                                const Expanded(child: Padding(padding: EdgeInsets.all(pad*2), child: Text(''))),
+                                const Expanded(child: PaddingAll(padding: pad*2, child: Text(''))),
 
-                                Padding(
-                                    padding: const EdgeInsets.all(pad),
+                                PaddingAll(
+                                    padding: pad,
                                     child: ElevatedButton(
                                         child: const Text('Delete'),
                                         onPressed: () {
