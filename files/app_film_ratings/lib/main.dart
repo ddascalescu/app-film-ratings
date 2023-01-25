@@ -6,13 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:data_table_2/data_table_2.dart';
 
-import 'utils/ratings.dart';
-import 'formatters.dart';
-import 'colors.dart';
-
-const String appTitle = 'Film Ratings';
-final AppTheme appTheme = AppThemeDark(); // TODO: maybe move this into a settings .txt or .config file?
-const double pad = 8.0;
+import 'utils/globals.dart';
+import 'classes/ratings.dart';
+import 'utils/formatters.dart';
+import 'utils/colors.dart';
 
 void main() => runApp(const App());
 
@@ -140,9 +137,10 @@ class _RatingsTableState extends State<RatingsTable> {
                               /* TEXT: Dialog title */
                               const Text('Add rating'),
 
+                              // TODO: make these into a class
                               /* ENTRY: Film title */
                               SizedBox(width: 250, child: Row(children: [SizedBox(
-                                  width: 250.0, // TODO: make this a global, based on the width of the actual screen
+                                  width: 250.0,
                                   child: Padding(
                                       padding: const EdgeInsets.all(pad),
                                       child: TextField(

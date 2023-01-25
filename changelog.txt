@@ -17,7 +17,13 @@
 
 0.2.0 - data
  - Add dropdowns
+   - 'first viewing', 'repeat viewing', 'imdb import', 'changed mind'
+   - Custom ones that save for future
  - Add rating ID
+   - MAC address / device name (if device name, have option in settings in future)
+   - Datetime
+
+0.2.1 - code organisation
 
 0.3.0 - saving/syncing data
  - Import/export
