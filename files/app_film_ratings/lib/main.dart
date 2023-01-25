@@ -1,3 +1,4 @@
+import 'package:app_film_ratings/utils/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -139,8 +140,8 @@ class _RatingsTableState extends State<RatingsTable> {
 
                               // TODO: make these into a class
                               /* ENTRY: Film title */
-                              SizedBox(width: 250, child: Row(children: [SizedBox(
-                                  width: 250.0,
+                              SizedBox(width: dialogInnerWidth, child: Row(children: [SizedBox(
+                                  width: dialogInnerWidth,
                                   child: Padding(
                                       padding: const EdgeInsets.all(pad),
                                       child: TextField(
@@ -152,89 +153,66 @@ class _RatingsTableState extends State<RatingsTable> {
                               )])),
 
                               /* ENTRY: Film year */
-                              SizedBox(width: 250, child: Row(children: [
-                                const Padding(padding: EdgeInsets.all(pad*2),
-                                    child: Text('Year:')
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(pad),
-                                        child: TextField(
-                                            controller: _yearController,
-                                            textAlign: TextAlign.right,
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [YearInputFormatter()],
-                                            decoration: const InputDecoration(hintText: '1994')
-                                        )
-                                    )
-                                )])),
+                              InputRow(
+                                  prompt: "Year:",
+                                  child: TextField(
+                                      controller: _yearController,
+                                      textAlign: TextAlign.right,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [YearInputFormatter()],
+                                      decoration: const InputDecoration(hintText: '1994')
+                              )),
 
                               /* ENTRY: Rating */
-                              SizedBox(width: 250, child: Row(children: [
-                                const Padding(padding: EdgeInsets.all(pad*2),
-                                    child: Text('Rating:')
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(pad),
-                                        child: TextField(
-                                            controller: _numberController,
-                                            textAlign: TextAlign.right,
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [RatingInputFormatter()],
-                                            decoration: const InputDecoration(hintText: '8.5')
-                                        )
-                                    )
-                                )
-                              ])),
+                              InputRow(
+                                  prompt: "Rating:",
+                                  child: TextField(
+                                      controller: _numberController,
+                                      textAlign: TextAlign.right,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [RatingInputFormatter()],
+                                      decoration: const InputDecoration(hintText: '8.5')
+                              )),
 
                               /* ENTRY: Rating date */
-                              SizedBox(width: 250, child: Row(children: [
-                                const Padding(padding: EdgeInsets.all(pad*2),
-                                    child: Text('Rating date:')
-                                ),
-                                Expanded(
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(pad),
-                                        child: TextField(
-                                            readOnly: true,
-                                            controller: TextEditingController(
-                                              text: Ratings.dateFormat.format(_selectedDate),
-                                            ),
-                                            textAlign: TextAlign.right,
+                              InputRow(
+                                  prompt: "Rating date:",
+                                  child: TextField(
+                                    readOnly: true,
+                                    controller: TextEditingController(
+                                      text: Ratings.dateFormat.format(_selectedDate),
+                                    ),
+                                    textAlign: TextAlign.right,
 
-                                            onTap: () async {
-                                              final DateTime? picked = await showDatePicker(
-                                                context: context,
-                                                initialDate: _selectedDate,
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime.now(),
-                                                builder: (BuildContext context, Widget? child) {
-                                                  return Theme(
-                                                    data: appTheme.themeDataPicker(),
-                                                    child: child!
-                                                  );
-                                                }
-                                              );
+                                    onTap: () async {
+                                      final DateTime? picked = await showDatePicker(
+                                          context: context,
+                                          initialDate: _selectedDate,
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime.now(),
+                                          builder: (BuildContext context, Widget? child) {
+                                            return Theme(
+                                                data: appTheme.themeDataPicker(),
+                                                child: child!
+                                            );
+                                          }
+                                      );
 
-                                              if (picked != null && picked != _selectedDate) {
-                                                setState(() {
-                                                  Navigator.pop(context); // This line...
-                                                  _selectedDate = picked;
-                                                  _showDialogAdd(); // and this line...
-                                                  /* ... is a hack to make the TextField update to
-                                                  * show the newly selected date, as it wasn't
-                                                  * before. It just closes and reopens the
-                                                  * dialog box without calling resetFields(). */
-                                                  // TODO: find better fix, if reloading affects performance
-                                                });
-                                              }
-                                            }
+                                      if (picked != null && picked != _selectedDate) {
+                                        setState(() {
+                                          Navigator.pop(context); // This line...
+                                          _selectedDate = picked;
+                                          _showDialogAdd(); // and this line...
+                                          /* ... is a hack to make the TextField update to
+                                                    * show the newly selected date, as it wasn't
+                                                    * before. It just closes and reopens the
+                                                    * dialog box without calling resetFields(). */
+                                          // TODO: find better fix, if reloading affects performance
+                                        });
+                                      }
+                                    }
 
-                                        )
-                                    )
-                                )
-                              ])),
+                              )),
 
                               /* BUTTONS: Cancel and Add */
                               SizedBox(width: 250, child: Row(children: [

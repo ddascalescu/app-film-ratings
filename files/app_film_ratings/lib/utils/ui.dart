@@ -4,7 +4,7 @@ import 'globals.dart';
 
 class InputRow extends StatelessWidget {
   final String prompt;
-  final StatelessWidget child;
+  final Widget child;
 
   const InputRow({super.key, required this.prompt, required this.child});
 
