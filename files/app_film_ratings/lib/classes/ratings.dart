@@ -1,10 +1,13 @@
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
 class Ratings {
   static final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   static final DateFormat _dateFormatShort = DateFormat('dd-MMM');
   static final DateFormat _dateFormatOnlyYear = DateFormat('yyyy');
+
+  static final DateFormat dateFormatTimestamp = DateFormat('yyyyMMddhhmmss');
 
   static final descriptions = {
     1: "First viewing",
@@ -32,23 +35,27 @@ class Ratings {
 
 class Rating {
   // TODO: if started caching films, change this to a corresponding filmID
-  // TODO: when added sorting, add ratingID and use as a default sort
+  late String uuid;
+  late String timestamp;
+
   String filmTitle;
   int filmYear;
 
   double rating;
-  DateTime? ratingDate;
+  late DateTime ratingDate;
   int descriptionId;
 
   Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate, this.descriptionId) {
+    uuid = const Uuid().v4();
+    timestamp = Ratings.dateFormatTimestamp.format(DateTime.now());
     this.ratingDate = DateTime(ratingDate.year, ratingDate.month, ratingDate.day);
   }
 
   String get filmYearString => filmYear.toString();
   String get ratingString => rating.toStringAsFixed(1);
-  String get ratingDateString => Ratings.dateFormat.format(ratingDate!);
+  String get ratingDateString => Ratings.dateFormat.format(ratingDate);
 
-  String get ratingDateStringShort => (ratingDate!.isAfter(DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day))) ? Ratings._dateFormatShort.format(ratingDate!) : Ratings._dateFormatOnlyYear.format(ratingDate!);
+  String get ratingDateStringShort => (ratingDate.isAfter(DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day))) ? Ratings._dateFormatShort.format(ratingDate) : Ratings._dateFormatOnlyYear.format(ratingDate);
   /* ratingDateStringShort displays e.g. 04-Nov if date is within 1 year of
   * current date, otherwise displays just the year */
 
@@ -63,6 +70,8 @@ class Rating {
   }
 
   Map<String, dynamic> toJson() => {
+    'uuid': uuid,
+    'ts': timestamp,
     'title': filmTitle,
     'year': filmYear,
     'rating': rating,
@@ -71,7 +80,9 @@ class Rating {
   };
 
   Rating.fromJson(Map<String, dynamic> json)
-      : filmTitle = json['title'],
+      : uuid = json['uuid'],
+        timestamp = json['ts'],
+        filmTitle = json['title'],
         filmYear = json['year'],
         rating = json['rating'],
         ratingDate = Ratings.dateFormat.parse(json['date']),

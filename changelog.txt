@@ -15,15 +15,9 @@
 
 0.2.0 - Rating class additions
   - Added description dropdown
+  - Added Rating 'uuid' and 'timestamp' fields
 
 ===== PLANNED =====
-
-0.2.0 - data
- - Dropdowns
-   - Align text to right
- - Add rating ID
-   - MAC address / device name (if device name, have option in settings in future)
-   - Datetime
 
 0.2.1 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
