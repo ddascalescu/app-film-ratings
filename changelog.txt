@@ -1,19 +1,19 @@
 ===== COMPLETED =====
 
-0.1.0 - First version
+0.1.0 - First version (27/12/22)
  - Main table with film title, year, rating, date
  - 'Add rating' button that brings up dialog for details
  - Delete button
  - Saving/loading data locally as JSON file
 
-0.1.1 - Layout/design edits
+0.1.1 - Layout/design edits (21/01/23)
  - Made table items clickable, brings up details
    - Moved delete button here
  - Changed table date format to be smaller
  - Added Inter font, using in appbar
  - Added Indigo logo in appbar
 
-0.2.0 - Rating class additions
+0.2.0 (Alpha testing) - Rating class additions (26/01/23)
   - Added description dropdown
   - Added Rating 'uuid' and 'timestamp' fields
 
