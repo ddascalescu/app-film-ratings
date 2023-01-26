@@ -236,9 +236,18 @@ class _RatingsTableState extends State<RatingsTable> {
                                       items: Ratings.descriptions.entries
                                           .map((entry) => DropdownMenuItem<int>(
                                           value: entry.key,
-                                          child: Text(entry.value, overflow: TextOverflow.ellipsis,)
+                                          child: Text(entry.value)
                                       ))
-                                          .toList()
+                                          .toList(),
+                                      selectedItemBuilder: (BuildContext context) {
+                                        return Ratings.descriptions.entries.map<Widget>((_) {
+                                          return Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Text(Ratings.descriptions[_selectedDropdown]!, overflow: TextOverflow.ellipsis)
+                                          );
+                                        })
+                                            .toList();
+                                      }
                                   )
                               ),
 
