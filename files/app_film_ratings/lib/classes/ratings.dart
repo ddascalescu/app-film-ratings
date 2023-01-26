@@ -6,6 +6,13 @@ class Ratings {
   static final DateFormat _dateFormatShort = DateFormat('dd-MMM');
   static final DateFormat _dateFormatOnlyYear = DateFormat('yyyy');
 
+  static final descriptions = {
+    1: "First viewing",
+    2: "Repeat viewing",
+    3: "Retroactive change",
+    4: "External import"
+  }; // TODO: make final list combination of this plus any custom-made descriptions
+
   static String encode(List<Rating> ratings) {
     JsonEncoder e = const JsonEncoder.withIndent(' ');
     return e.convert(ratings);
@@ -31,8 +38,9 @@ class Rating {
 
   double rating;
   DateTime? ratingDate;
+  int descriptionId;
 
-  Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate) {
+  Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate, this.descriptionId) {
     this.ratingDate = DateTime(ratingDate.year, ratingDate.month, ratingDate.day);
   }
 
@@ -58,12 +66,14 @@ class Rating {
     'title': filmTitle,
     'year': filmYear,
     'rating': rating,
-    'date': ratingDateString
+    'date': ratingDateString,
+    'descr': descriptionId
   };
 
   Rating.fromJson(Map<String, dynamic> json)
       : filmTitle = json['title'],
         filmYear = json['year'],
         rating = json['rating'],
-        ratingDate = Ratings.dateFormat.parse(json['date']);
+        ratingDate = Ratings.dateFormat.parse(json['date']),
+        descriptionId = json['descr'];
 }

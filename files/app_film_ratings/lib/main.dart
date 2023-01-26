@@ -70,6 +70,7 @@ class _RatingsTableState extends State<RatingsTable> {
   final _yearController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
+  int _selectedDropdown = 1;
 
   final List<Rating> ratings = [];
 
@@ -123,6 +124,7 @@ class _RatingsTableState extends State<RatingsTable> {
     _yearController.clear();
     _numberController.clear();
     _selectedDate = DateTime.now();
+    _selectedDropdown = 1;
   }
 
   void _showDialogAdd() {
@@ -147,7 +149,8 @@ class _RatingsTableState extends State<RatingsTable> {
                                       controller: _textController,
                                       textAlign: TextAlign.center,
                                       decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
-                              )),
+                                  )
+                              ),
 
                               /* ENTRY: Film year */
                               InputRow(
@@ -158,7 +161,8 @@ class _RatingsTableState extends State<RatingsTable> {
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [YearInputFormatter()],
                                       decoration: const InputDecoration(hintText: '1994')
-                              )),
+                                  )
+                              ),
 
                               /* ENTRY: Rating */
                               InputRow(
@@ -169,47 +173,74 @@ class _RatingsTableState extends State<RatingsTable> {
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [RatingInputFormatter()],
                                       decoration: const InputDecoration(hintText: '8.5')
-                              )),
+                                  )
+                              ),
 
                               /* ENTRY: Rating date */
                               InputRow(
                                   prompt: "Rating date:",
                                   child: TextField(
-                                    readOnly: true,
-                                    controller: TextEditingController(
-                                      text: Ratings.dateFormat.format(_selectedDate),
-                                    ),
-                                    textAlign: TextAlign.right,
+                                      readOnly: true,
+                                      controller: TextEditingController(
+                                          text: Ratings.dateFormat.format(_selectedDate),
+                                      ),
+                                      textAlign: TextAlign.right,
 
-                                    onTap: () async {
-                                      final DateTime? picked = await showDatePicker(
-                                          context: context,
-                                          initialDate: _selectedDate,
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime.now(),
-                                          builder: (BuildContext context, Widget? child) {
-                                            return Theme(
-                                                data: appTheme.themeDataPicker(),
-                                                child: child!
-                                            );
-                                          }
-                                      );
+                                      onTap: () async {
+                                        final DateTime? picked = await showDatePicker(
+                                            context: context,
+                                            initialDate: _selectedDate,
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime.now(),
+                                            builder: (BuildContext context, Widget? child) {
+                                              return Theme(
+                                                  data: appTheme.themeDataPicker(),
+                                                  child: child!
+                                              );
+                                            }
+                                        );
 
-                                      if (picked != null && picked != _selectedDate) {
-                                        setState(() {
-                                          Navigator.pop(context); // This line...
-                                          _selectedDate = picked;
-                                          _showDialogAdd(); // and this line...
-                                          /* ... is a hack to make the TextField update to
-                                                    * show the newly selected date, as it wasn't
-                                                    * before. It just closes and reopens the
-                                                    * dialog box without calling resetFields(). */
-                                          // TODO: find better fix, if reloading affects performance
-                                        });
+                                        if (picked != null && picked != _selectedDate) {
+                                          setState(() {
+                                            Navigator.pop(context); // This line...
+                                            _selectedDate = picked;
+                                            _showDialogAdd(); // and this line...
+                                            /* ... is a hack to make the TextField update to
+                                                      * show the newly selected date, as it wasn't
+                                                      * before. It just closes and reopens the
+                                                      * dialog box without calling resetFields(). */
+                                            // TODO: find better fix, if reloading affects performance
+                                            // might be because of async
+                                          });
+                                        }
                                       }
-                                    }
 
-                              )),
+                                  )
+                              ),
+
+                              /* Description */
+                              InputRow(
+                                  prompt: "Description:",
+                                  child: DropdownButton<int>(
+                                      value: _selectedDropdown,
+                                      isExpanded: true,
+                                      iconSize: 0.0,
+                                      onChanged: (int? newValue) {
+                                        setState(() {
+                                          // TODO: requires fix as above
+                                          Navigator.pop(context);
+                                          _selectedDropdown = newValue!;
+                                          _showDialogAdd();
+                                        });
+                                      },
+                                      items: Ratings.descriptions.entries
+                                          .map((entry) => DropdownMenuItem<int>(
+                                          value: entry.key,
+                                          child: Text(entry.value, overflow: TextOverflow.ellipsis,)
+                                      ))
+                                          .toList()
+                                  )
+                              ),
 
                               /* BUTTONS: Cancel and Add */
                               SizedBox(width: dialogInnerWidth, child: Row(children: [
@@ -259,7 +290,8 @@ class _RatingsTableState extends State<RatingsTable> {
           _textController.text,
           int.parse(_yearController.text),
           double.parse(_numberController.text),
-          _selectedDate
+          _selectedDate,
+          _selectedDropdown
       );
       if (r.filmYear < 1850) {
         ScaffoldMessenger.of(dialogContext).showSnackBar(
@@ -320,29 +352,32 @@ class _RatingsTableState extends State<RatingsTable> {
                                           text: rating.filmTitle
                                       ),
                                       textAlign: TextAlign.center
-                              )),
+                                  )
+                              ),
 
                               /* ENTRY: Film year */
                               InputRow(
-                                prompt: "Year:",
-                                child: TextField(
-                                    readOnly: true,
-                                    controller: TextEditingController(
-                                        text: rating.filmYearString
-                                    ),
-                                    textAlign: TextAlign.right
-                              )),
+                                  prompt: "Year:",
+                                  child: TextField(
+                                      readOnly: true,
+                                      controller: TextEditingController(
+                                          text: rating.filmYearString
+                                      ),
+                                      textAlign: TextAlign.right
+                                  )
+                              ),
 
                               /* ENTRY: Rating */
                               InputRow(
-                                prompt: "Rating:",
-                                child: TextField(
-                                    readOnly: true,
-                                    controller: TextEditingController(
-                                        text: rating.ratingString
-                                    ),
-                                    textAlign: TextAlign.right
-                              )),
+                                  prompt: "Rating:",
+                                  child: TextField(
+                                      readOnly: true,
+                                      controller: TextEditingController(
+                                          text: rating.ratingString
+                                      ),
+                                      textAlign: TextAlign.right
+                                  )
+                              ),
 
                               /* ENTRY: Rating date */
                               InputRow(
@@ -353,7 +388,20 @@ class _RatingsTableState extends State<RatingsTable> {
                                       text: rating.ratingDateString,
                                     ),
                                     textAlign: TextAlign.right
-                              )),
+                                )
+                              ),
+
+                              /* ENTRY: Description */
+                              InputRow(
+                                  prompt: "Description:",
+                                  child: TextField(
+                                      readOnly: true,
+                                      controller: TextEditingController(
+                                        text: Ratings.descriptions[rating.descriptionId],
+                                      ),
+                                      textAlign: TextAlign.right
+                                  )
+                              ),
 
                               /* BUTTONS: Cancel and Add */
                               SizedBox(width: dialogInnerWidth, child: Row(children: [

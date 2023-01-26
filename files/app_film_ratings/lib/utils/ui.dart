@@ -11,25 +11,24 @@ class InputRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (prompt == null) {
-      return SizedBox(width: dialogInnerWidth, child: Row(children: [SizedBox(
+      return SizedBox(
           width: dialogInnerWidth,
           child: PaddingAll(
               padding: pad,
               child: child
           )
-      )]));
+      );
     } else {
       return SizedBox(width: dialogInnerWidth, child: Row(children: [
         PaddingAll(
             padding: pad*2,
             child: Text(prompt!)
         ),
-        Expanded(
-            child: PaddingAll(
-                padding: pad,
-                child: child
-            )
-        )]));
+        Expanded(child: PaddingAll(
+            padding: pad,
+            child: child
+        ))
+      ]));
     }
   }
 }

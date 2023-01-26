@@ -28,7 +28,6 @@ In progress (active): Version 0.2.0:
 [Full changelog](https://github.com/ddascalescu/app-film-ratings/blob/main/changelog.txt)
 
 Planned features:
- - Add dropdown with options like 'first viewing', 'repeat viewing', 'imdb import', 'changed mind', 'other', & custom
  - Make main table sortable by any column
  - Make columns hideable
  - More rating criteria

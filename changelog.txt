@@ -13,17 +13,20 @@
  - Added Inter font, using in appbar
  - Added Indigo logo in appbar
 
+0.2.0 - Rating class additions
+  - Added description dropdown
+
 ===== PLANNED =====
 
 0.2.0 - data
- - Add dropdowns
-   - 'first viewing', 'repeat viewing', 'imdb import', 'changed mind'
-   - Custom ones that save for future
+ - Dropdowns
+   - Align text to right
  - Add rating ID
    - MAC address / device name (if device name, have option in settings in future)
    - Datetime
 
 0.2.1 - code organisation
+  - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
 
 0.3.0 - saving/syncing data
  - Import/export
@@ -44,6 +47,7 @@ PLAN - (non-urgent) implement at some point
  - Make intro/splash screen
  -? Change font of rest of app
  -? Have something show when logo is clicked
+ - Custom descriptions that save for future
 
 BUGS - (non-urgent) fix at some point
  - Date picker selection requires reloading of dialog box
