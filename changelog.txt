@@ -26,9 +26,15 @@
   - Add deletion 'are you sure?'
   - Change description to category
   - Add description entry box
+  - Start date picker week on monday
+  - Caps text input
 
 0.2.2 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
+    - Specify input rows (+ name of return value to put in dict)
+    - Specify buttons
+    - Return values using await
+      - Dict?
   - Fix possible async issue
   - Do other TODOs
 
