@@ -19,14 +19,25 @@
 
 ===== PLANNED =====
 
-0.2.1 - code organisation
+0.2.1 - backward compatibility
+  - Add version code to json file, check it on read/write and apply any compatibility measures
+  - Add redundancy (will factor in gdrive later)
+    - Local backups every x time
+  - Add deletion 'are you sure?'
+  - Change description to category
+  - Add description entry box
+
+0.2.2 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
+  - Fix possible async issue
+  - Do other TODOs
 
 0.3.0 - saving/syncing data
  - Import/export
  - Gdrive
 
 0.4.0 - imdb
+  - Auto add description mentioning import from (etc.) imdb
 
 0.5.0 - analytics
 
