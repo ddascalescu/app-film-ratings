@@ -63,8 +63,9 @@ Planned features:
  - Make loading intro screen, showing logo
  - Voice input
  - Friends
-   - See data
+   - See data/activity/statistics
    - Set public/private data
+   - Recommendations based on friends activity
  
 #
 [Dan Dascalescu](https://github.com/ddascalescu)
