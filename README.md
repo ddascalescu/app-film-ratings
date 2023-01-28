@@ -62,6 +62,9 @@ Planned features:
  - Automatically update hint in 'Add rating' box - maybe user suggestions?, if done the above point then maybe most popular of the week
  - Make loading intro screen, showing logo
  - Voice input
+ - Friends
+   - See data
+   - Set public/private data
  
 #
 [Dan Dascalescu](https://github.com/ddascalescu)
