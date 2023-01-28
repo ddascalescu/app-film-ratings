@@ -35,6 +35,8 @@ Planned features:
  - Make columns hideable
  - More rating criteria
  - Searching through IMDb API for films (maybe storing them all in useful format? depends on format they appear in API and how easy retrieval is. cache may be nice for offline use)
+ - Ratings for plot/effects/characters etc.
+ - Ratings for each actor
  - Analytics
    - Numbers for specific film/director/actor/genre etc. (box with info)
      - average rating, times seen, most watched film by-director/with-actor/in-genre
