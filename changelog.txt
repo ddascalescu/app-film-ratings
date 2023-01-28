@@ -28,6 +28,7 @@
   - Add description entry box
   - Start date picker week on monday
   - Caps text input
+  - Ellipsis on details tab
 
 0.2.2 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
