@@ -420,7 +420,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                   )
                               ),
 
-                              /* BUTTONS: Cancel and Add */
+                              /* BUTTONS: Return and Delete */
                               SizedBox(width: dialogInnerWidth, child: Row(children: [
                                 PaddingAll(
                                     padding: pad,
@@ -437,7 +437,68 @@ class _RatingsTableState extends State<RatingsTable> {
                                     child: ElevatedButton(
                                         child: const Text('Delete'),
                                         onPressed: () {
+                                          _showDialogDelete(context, rating);
+                                          //Navigator.pop(context);
+                                          //_removeRating(rating);
+                                        }
+                                    )
+                                )
+                              ]))
+                            ]
+                        )
+                    )
+                );
+              })
+          );
+        }
+    );
+  }
+
+  void _showDialogDelete(BuildContext parentContext, Rating rating) {
+    showDialog(context: context,
+        builder: (context) {
+          return ScaffoldMessenger(
+              child: Builder(builder: (context) {
+                return Scaffold(
+                    backgroundColor: Colors.transparent,
+                    /* DIALOG: Delete check */
+                    body: Dialog(
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              /* TEXT: Check */
+                              SizedBox(width: dialogInnerWidth, child: PaddingAll(padding: pad*2,
+                                child: Text(
+                                  "Are you sure you wish to delete this rating of "
+                                    "\"${rating.filmTitle}\" from ${rating.ratingDateString}?",
+                                  style: const TextStyle(fontSize: 16),
+                                  textAlign: TextAlign.center
+                                ),
+                              )),
+
+                              /* BUTTONS: Cancel and Delete */
+                              SizedBox(width: dialogInnerWidth, child: Row(children: [
+                                PaddingAll(
+                                    padding: pad,
+                                    child: ElevatedButton(
+                                        child: const Text('Cancel'),
+                                        onPressed: () { Navigator.pop(context); }
+                                    )
+                                ),
+
+                                const Expanded(child: PaddingAll(padding: pad*2, child: Text(''))),
+
+                                PaddingAll(
+                                    padding: pad,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color(0xFF8A192F)
+                                        ),
+                                        child: const Text('Delete'),
+                                        onPressed: () {
                                           Navigator.pop(context);
+                                          Navigator.pop(parentContext);
                                           _removeRating(rating);
                                         }
                                     )
@@ -536,5 +597,5 @@ File? getMostRecentFile(Directory directory) {
 
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
-  return p.join(directory.path, 'Film Ratings');
+  return p.join(directory.path, appTitle);
 }

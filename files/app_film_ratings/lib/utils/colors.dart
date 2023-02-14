@@ -5,6 +5,7 @@ class Indigo {
 
   static Color color = Color(value);
 
+  // TODO set r, g, and b variables (easier to change)
   static MaterialColor swatch = MaterialColor(value, const <int, Color>{
     50: Color.fromRGBO(53, 16, 145, 0.1),
     100: Color.fromRGBO(53, 16, 145, 0.2),
@@ -19,6 +20,7 @@ class Indigo {
   });
 }
 
+// TODO improve (include text size) (maybe w change notifiers)
 abstract class AppTheme {
   ThemeData themeData();
   ThemeData themeDataPicker();

@@ -1,6 +1,6 @@
 import 'colors.dart';
 
-const String appTitle = 'Film Ratings';
+const String appTitle = "Film Ratings";
 final AppTheme appTheme = AppThemeDark(); // TODO: maybe move this into a settings .txt or .config file?
 const double pad = 8.0;
 
