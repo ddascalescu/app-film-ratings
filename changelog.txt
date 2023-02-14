@@ -18,13 +18,13 @@
   - Added Rating 'uuid' and 'timestamp' fields
 
 0.2.1 - Backward Compatibility (XX/XX/XX)
-  - Add version code to json file, check it on read/write and apply any compatibility measures
+  - Added version code to json file
+    - Applying compatibility measures from versions <= 0.2.0
+  - Added local backups (per 7 days)
 
 ===== PLANNED =====
 
 0.2.1 - backward compatibility
-  - Add redundancy (will factor in gdrive later)
-    - Local backups every x time
   - Add deletion 'are you sure?'
   - Change description to type
   - Add description entry box

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app_film_ratings/utils/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
@@ -16,6 +17,7 @@ import 'classes/ratings.dart';
 import 'utils/formatters.dart';
 import 'utils/colors.dart';
 
+//TODO make text quotes consistent
 var logger = Logger();
 
 void main() => runApp(const App());
@@ -455,11 +457,31 @@ class _RatingsTableState extends State<RatingsTable> {
   void initState() {
     super.initState();
 
+    _createBackupIfNeeded();
+
     _readRatings().then((ratings) {
       setState(() {
         this.ratings.addAll(ratings);
       });
     });
+  }
+
+  void _createBackupIfNeeded() async {
+    final directory = await _localBackupDir;
+    final File? latest = getMostRecentFile(directory);
+
+    if (latest == null || latest.lastModifiedSync().isBefore(DateTime.now().subtract(const Duration(days: 7)))) {
+      final file = await _localFile;
+      String newPath = p.join(directory.path, '${DateFormat('yyyyMMdd').format(DateTime.now())}_${p.basename(file.path)}');
+      file.copy(newPath);
+      logger.i("Backup created:"
+          "\n\tpath: $newPath");
+    }
+  }
+
+  Future<Directory> get _localBackupDir async {
+    final path = await _localPath;
+    return Directory(p.join(path, 'backups')).create();
   }
 
   Future<File> _writeRatings(List<Rating> ratings) async {
@@ -498,11 +520,21 @@ class _RatingsTableState extends State<RatingsTable> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File(p.join(path, 'Film Ratings', 'ratings.json')).create(recursive: true);
+    return File(p.join(path, 'ratings.json')).create();
   }
+}
+
+File? getMostRecentFile(Directory directory) {
+  final files = directory.listSync().whereType<File>().toList();
+  if (files.isEmpty) {
+    return null;
+  }
+
+  files.sort((a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()));
+  return files.first;
 }
 
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
-  return directory.path;
+  return p.join(directory.path, 'Film Ratings');
 }

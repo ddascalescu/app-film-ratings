@@ -14,6 +14,7 @@ Versions:
 Features:
  - Adding film ratings to a table
  - Persistent ratings storage in local file system
+   - Weekly backups
 
 Windows example:  
 <img src="../assets/assets/windows_main.png?raw=true" width="750">  
