@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_film_ratings/utils/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -6,11 +8,15 @@ import 'package:path/path.dart' as p;
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:data_table_2/data_table_2.dart';
+import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'utils/globals.dart';
 import 'classes/ratings.dart';
 import 'utils/formatters.dart';
 import 'utils/colors.dart';
+
+var logger = Logger();
 
 void main() => runApp(const App());
 
@@ -218,9 +224,9 @@ class _RatingsTableState extends State<RatingsTable> {
                                   )
                               ),
 
-                              /* Description */
+                              /* Type */
                               InputRow(
-                                  prompt: "Description:",
+                                  prompt: "Type:",
                                   child: DropdownButton<int>(
                                       value: _selectedDropdown,
                                       isExpanded: true,
@@ -233,17 +239,17 @@ class _RatingsTableState extends State<RatingsTable> {
                                           _showDialogAdd();
                                         });
                                       },
-                                      items: Ratings.descriptions.entries
+                                      items: Ratings.types.entries
                                           .map((entry) => DropdownMenuItem<int>(
                                           value: entry.key,
                                           child: Text(entry.value)
                                       ))
                                           .toList(),
                                       selectedItemBuilder: (BuildContext context) {
-                                        return Ratings.descriptions.entries.map<Widget>((_) {
+                                        return Ratings.types.entries.map<Widget>((_) {
                                           return Align(
                                               alignment: Alignment.centerRight,
-                                              child: Text(Ratings.descriptions[_selectedDropdown]!, overflow: TextOverflow.ellipsis)
+                                              child: Text(Ratings.types[_selectedDropdown]!, overflow: TextOverflow.ellipsis)
                                           );
                                         })
                                             .toList();
@@ -400,13 +406,13 @@ class _RatingsTableState extends State<RatingsTable> {
                                 )
                               ),
 
-                              /* ENTRY: Description */
+                              /* ENTRY: Type */
                               InputRow(
-                                  prompt: "Description:",
+                                  prompt: "Type:",
                                   child: TextField(
                                       readOnly: true,
                                       controller: TextEditingController(
-                                        text: Ratings.descriptions[rating.descriptionId],
+                                        text: Ratings.types[rating.typeId],
                                       ),
                                       textAlign: TextAlign.right
                                   )
@@ -448,6 +454,7 @@ class _RatingsTableState extends State<RatingsTable> {
   @override
   void initState() {
     super.initState();
+
     _readRatings().then((ratings) {
       setState(() {
         this.ratings.addAll(ratings);
@@ -456,19 +463,37 @@ class _RatingsTableState extends State<RatingsTable> {
   }
 
   Future<File> _writeRatings(List<Rating> ratings) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
     final file = await _localFile;
-    String data = Ratings.encode(ratings);
+    String data = Ratings.encode(ratings, packageInfo.version);
     return file.writeAsString(data);
   }
 
   Future<List<Rating>> _readRatings() async {
+    List<Rating> r = [];
+
     try {
       final file = await _localFile;
       String data = await file.readAsString();
-      return Ratings.decode(data);
+
+      try {
+        r = Ratings.decode(data);
+      } on AssertionError catch (_) {
+        var x = jsonDecode(data);
+        if (x is List) {
+          logger.i("Ratings file is version <= 0.2.0"
+              "\n\tUpdating...");
+          r = Ratings.decodeList(x);
+          _writeRatings(r);
+        }
+      }
     } catch (e) {
-      return [];
+      logger.e("Error reading from file:"
+          "\n\t$e");
     }
+
+    return r;
   }
 
   Future<File> get _localFile async {

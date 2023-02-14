@@ -13,22 +13,25 @@
  - Added Inter font, using in appbar
  - Added Indigo logo in appbar
 
-0.2.0 (Alpha testing) - Rating class additions (26/01/23)
+0.2.0 (Apples testing) - Rating class additions (26/01/23)
   - Added description dropdown
   - Added Rating 'uuid' and 'timestamp' fields
+
+0.2.1 - Backward Compatibility (XX/XX/XX)
+  - Add version code to json file, check it on read/write and apply any compatibility measures
 
 ===== PLANNED =====
 
 0.2.1 - backward compatibility
-  - Add version code to json file, check it on read/write and apply any compatibility measures
   - Add redundancy (will factor in gdrive later)
     - Local backups every x time
   - Add deletion 'are you sure?'
-  - Change description to category
+  - Change description to type
   - Add description entry box
 
 0.2.2 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
+  - Move Ratings table into UI, have main be only main stuff
   - Fix possible async issue
   - Do other TODOs
 

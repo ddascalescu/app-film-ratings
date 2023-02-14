@@ -2,6 +2,8 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
+import 'package:logger/logger.dart';
+
 class Ratings {
   static final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   static final DateFormat _dateFormatShort = DateFormat('dd-MMM');
@@ -9,25 +11,48 @@ class Ratings {
 
   static final DateFormat dateFormatTimestamp = DateFormat('yyyyMMddhhmmss');
 
-  static final descriptions = {
+  static final types = {
     1: "First viewing",
     2: "Repeat viewing",
     3: "Retroactive change",
     4: "External import"
   }; // TODO: make final list combination of this plus any custom-made descriptions
 
-  static String encode(List<Rating> ratings) {
+  static String encode(List<Rating> ratings, String version) {
+    Map<String, dynamic> map = {
+      "version": version,
+      "list": ratings
+    };
     JsonEncoder e = const JsonEncoder.withIndent(' ');
-    return e.convert(ratings);
+    return e.convert(map);
   }
 
   static List<Rating> decode(String data) {
-    var l = jsonDecode(data);
+    var m = jsonDecode(data);
+    assert (m is Map);
+
+    var l = m['list'];
     assert (l is List);
 
+    return decodeList(l);
+  }
+
+  static List<Rating> decodeList(List l) {
     List<Rating> ratings = [];
     for (var r in l) {
-      ratings.add(Rating.fromJson(r));
+      try {
+        Rating rating = Rating.fromJson(r);
+        ratings.add(rating);
+      } catch (e) {
+        try{
+          Rating rating = Rating.fromJson020(r);
+          ratings.add(rating);
+        } catch (e) {
+          Logger().w("Error decoding rating from JSON:"
+              "\n\t$r"
+              "\n\t$e");
+        }
+      }
     }
     return ratings;
   }
@@ -43,9 +68,9 @@ class Rating {
 
   double rating;
   late DateTime ratingDate;
-  int descriptionId;
+  int typeId;
 
-  Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate, this.descriptionId) {
+  Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate, this.typeId) {
     uuid = const Uuid().v4();
     timestamp = Ratings.dateFormatTimestamp.format(DateTime.now());
     this.ratingDate = DateTime(ratingDate.year, ratingDate.month, ratingDate.day);
@@ -76,7 +101,7 @@ class Rating {
     'year': filmYear,
     'rating': rating,
     'date': ratingDateString,
-    'descr': descriptionId
+    'type': typeId
   };
 
   Rating.fromJson(Map<String, dynamic> json)
@@ -86,5 +111,14 @@ class Rating {
         filmYear = json['year'],
         rating = json['rating'],
         ratingDate = Ratings.dateFormat.parse(json['date']),
-        descriptionId = json['descr'];
+        typeId = json['type'];
+
+  Rating.fromJson020(Map<String, dynamic> json)
+      : uuid = json['uuid'],
+        timestamp = json['ts'],
+        filmTitle = json['title'],
+        filmYear = json['year'],
+        rating = json['rating'],
+        ratingDate = Ratings.dateFormat.parse(json['date']),
+        typeId = json['descr'];
 }

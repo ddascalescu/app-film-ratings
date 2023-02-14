@@ -2,11 +2,11 @@
 A Flutter app for rating films and data visualization.
 
 Versions:
- - Android: (Pre-release)
+ - Android:
    - Google Play: Not yet released
-   - APK: [0.2.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.0-alpha-android)
+   - APK: [0.2.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.0-apples-android)
  - iOS: Not yet released
- - Windows: (Pre-release) [0.2.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.0-alpha)
+ - Windows: [0.2.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.0-apples)
  - Web: Not yet completed
  - Linux: Not yet completed
  - macOS: Not yet completed
@@ -24,7 +24,7 @@ Mobile examples:
 
 #
 
-In progress (on hold since Jan-27): Version 0.2.1:
+In progress (in progress): Version 0.2.1:
  - Adding backward compatibility and redundancy
  - Minor feature changes
 
@@ -45,6 +45,8 @@ Planned features:
    - Distribution charts (vertical bar chart)
      - number of times rated 0-1, 1-2, 2-3, etc. (option for granularity)
      - number of times rating a year
+   - Film groupings
+     - Franchises (Shrek), Universes (MCU), Studios (Dreamworks)
  - Define custom analytics that the user wants to see often, display on main analytics screen
  - Settings
    - Visual: light/dark theme
