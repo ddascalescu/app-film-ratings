@@ -34,8 +34,10 @@ In progress (in progress): Version 0.2.1:
 Planned features:
  - Make main table sortable by any column
  - Make columns hideable
- - More rating criteria
  - Searching through IMDb API for films (maybe storing them all in useful format? depends on format they appear in API and how easy retrieval is. cache may be nice for offline use)
+ - More rating criteria
+   - Plot, effects, characters, music, humour
+ - Ratings for each actor
  - Analytics
    - Numbers for specific film/director/actor/genre etc. (box with info)
      - average rating, times seen, most watched film by-director/with-actor/in-genre
@@ -65,6 +67,10 @@ Planned features:
  - Automatically update hint in 'Add rating' box - maybe user suggestions?, if done the above point then maybe most popular of the week
  - Make loading intro screen, showing logo
  - Voice input
+ - Friends
+   - See data/activity/statistics
+   - Set public/private data
+   - Recommendations based on friends activity
  
 #
 [Dan Dascalescu](https://github.com/ddascalescu)

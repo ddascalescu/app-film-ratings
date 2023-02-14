@@ -28,13 +28,20 @@
 
 0.2.1 - backward compatibility
   - Add description entry box
+  - Start date picker week on monday
+  - Caps text input
+  - Ellipsis on details tab
 
 0.2.2 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method
-    - Sections
-      - Header
-      - Body (column of widgets)
+    - Inputs
+      - Header (text)
+      - Body 1 (column of widgets)
+      - Body 2 (input rows)
       - Buttons (row of buttons)
+      - List of names of return values to put in dict (equal length to body 2)
+    - Return dict
+      - Use Future and await the dialog function call
     - Make main column centered and minimum size to reduce dialog size
     - Make body elements scrollable to remove clipping error
   - Move Ratings table into UI, have main be only main stuff
