@@ -23,6 +23,7 @@
     - Applying compatibility measures from versions <= 0.2.0
   - Added local backups (per 7 days)
   - Added deletion double-check
+  - Set default and minimum window size for Windows
 
 ===== PLANNED =====
 

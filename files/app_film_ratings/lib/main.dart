@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:desktop_window/desktop_window.dart';
 
 import 'utils/globals.dart';
 import 'classes/ratings.dart';
@@ -20,7 +21,15 @@ import 'utils/colors.dart';
 //TODO make text quotes consistent
 var logger = Logger();
 
-void main() => runApp(const App());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows) {
+    DesktopWindow.setMinWindowSize(const Size(200, 300));
+    DesktopWindow.setWindowSize(const Size(600, 800));
+  }
+
+  runApp(const App());
+}
 
 class App extends StatelessWidget {
   const App({super.key});
