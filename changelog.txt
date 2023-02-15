@@ -19,6 +19,7 @@
 
 0.2.1 - Backward Compatibility (XX/XX/XX)
   - Changed description to type
+  - Add description entry box
   - Added version code to json file
     - Applying compatibility measures from versions <= 0.2.0
   - Added local backups (per 7 days)
@@ -28,7 +29,6 @@
 ===== PLANNED =====
 
 0.2.1 - backward compatibility
-  - Add description entry box
   - Start date picker week on monday
   - Caps text input
   - Ellipsis on details tab

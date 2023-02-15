@@ -20,6 +20,7 @@ class InputRow extends StatelessWidget {
       );
     } else {
       return SizedBox(width: dialogInnerWidth, child: Row(children: [
+        // TODO: remove padding (at least left padding) to make inline with film name box
         PaddingAll(
             padding: pad*2,
             child: Text(prompt!)

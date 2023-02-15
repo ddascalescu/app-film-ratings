@@ -31,27 +31,25 @@ class Ratings {
     var m = jsonDecode(data);
     assert (m is Map);
 
+    var v = m['version'];
+    assert (v is String);
+
     var l = m['list'];
     assert (l is List);
 
-    return decodeList(l);
+    return decodeList(l, v);
   }
 
-  static List<Rating> decodeList(List l) {
+  static List<Rating> decodeList(List l, String version) {
     List<Rating> ratings = [];
     for (var r in l) {
       try {
-        Rating rating = Rating.fromJson(r);
+        Rating rating = Rating.fromJson(r, version);
         ratings.add(rating);
       } catch (e) {
-        try{
-          Rating rating = Rating.fromJson020(r);
-          ratings.add(rating);
-        } catch (e) {
-          Logger().w("Error decoding rating from JSON:"
-              "\n\t$r"
-              "\n\t$e");
-        }
+        Logger().w("Error decoding rating from JSON:"
+            "\n\t$r"
+            "\n\t$e");
       }
     }
     return ratings;
@@ -69,12 +67,17 @@ class Rating {
   double rating;
   late DateTime ratingDate;
   int typeId;
+  String description;
 
-  Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate, this.typeId) {
+
+
+  Rating(this.filmTitle, this.filmYear, this.rating, DateTime ratingDate, this.typeId, this.description) {
     uuid = const Uuid().v4();
     timestamp = Ratings.dateFormatTimestamp.format(DateTime.now());
     this.ratingDate = DateTime(ratingDate.year, ratingDate.month, ratingDate.day);
   }
+
+
 
   String get filmYearString => filmYear.toString();
   String get ratingString => rating.toStringAsFixed(1);
@@ -101,24 +104,28 @@ class Rating {
     'year': filmYear,
     'rating': rating,
     'date': ratingDateString,
-    'type': typeId
+    'type': typeId,
+    'descr': description
   };
 
-  Rating.fromJson(Map<String, dynamic> json)
-      : uuid = json['uuid'],
-        timestamp = json['ts'],
-        filmTitle = json['title'],
-        filmYear = json['year'],
-        rating = json['rating'],
-        ratingDate = Ratings.dateFormat.parse(json['date']),
-        typeId = json['type'];
+  factory Rating.fromJson(Map<String, dynamic> json, String version) {
+    if (version == '0.2.1') {
+      json['descr'] = "";
+    }
+    if (version == '') {
+      json['type'] = json['descr'];
+      json['descr'] = "";
+    }
+    return Rating.fromJsonDefault(json);
+  }
 
-  Rating.fromJson020(Map<String, dynamic> json)
+  Rating.fromJsonDefault(Map<String, dynamic> json)
       : uuid = json['uuid'],
         timestamp = json['ts'],
         filmTitle = json['title'],
         filmYear = json['year'],
         rating = json['rating'],
         ratingDate = Ratings.dateFormat.parse(json['date']),
-        typeId = json['descr'];
+        typeId = json['type'],
+        description = json['descr'];
 }

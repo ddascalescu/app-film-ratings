@@ -85,6 +85,7 @@ class _RatingsTableState extends State<RatingsTable> {
   final _textController = TextEditingController();
   final _numberController = TextEditingController();
   final _yearController = TextEditingController();
+  final _descrController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
   int _selectedDropdown = 1;
@@ -142,6 +143,7 @@ class _RatingsTableState extends State<RatingsTable> {
     _numberController.clear();
     _selectedDate = DateTime.now();
     _selectedDropdown = 1;
+    _descrController.clear();
   }
 
   void _showDialogAdd() {
@@ -235,7 +237,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                   )
                               ),
 
-                              /* Type */
+                              /* ENTRY: Type */
                               InputRow(
                                   prompt: "Type:",
                                   child: DropdownButton<int>(
@@ -267,6 +269,22 @@ class _RatingsTableState extends State<RatingsTable> {
                                       }
                                   )
                               ),
+
+                              /* ENTRY: Description */
+                              SizedBox(width: dialogInnerWidth, height: 100, child: PaddingAll(padding: pad,
+                                  child: TextField(
+                                      controller: _descrController,
+                                      decoration: const InputDecoration(
+                                          hintText: "Optional description...",
+                                          border: OutlineInputBorder()
+                                      ),
+                                      minLines: 3,
+                                      maxLines: null,
+                                      style: const TextStyle(
+                                          fontSize: 14
+                                      )
+                                  )
+                              )),
 
                               /* BUTTONS: Cancel and Add */
                               SizedBox(width: dialogInnerWidth, child: Row(children: [
@@ -317,7 +335,8 @@ class _RatingsTableState extends State<RatingsTable> {
           int.parse(_yearController.text),
           double.parse(_numberController.text),
           _selectedDate,
-          _selectedDropdown
+          _selectedDropdown,
+          _descrController.text
       );
       if (r.filmYear < 1850) {
         ScaffoldMessenger.of(dialogContext).showSnackBar(
@@ -428,6 +447,23 @@ class _RatingsTableState extends State<RatingsTable> {
                                       textAlign: TextAlign.right
                                   )
                               ),
+
+                              SizedBox(width: dialogInnerWidth, height: 100, child: PaddingAll(padding: pad,
+                                  child: TextField(
+                                      readOnly: true,
+                                      controller: TextEditingController(
+                                        text: rating.description
+                                      ),
+                                      decoration: const InputDecoration(
+                                          border: OutlineInputBorder()
+                                      ),
+                                      minLines: 3,
+                                      maxLines: null,
+                                      style: const TextStyle(
+                                          fontSize: 14
+                                      )
+                                  )
+                              )),
 
                               /* BUTTONS: Return and Delete */
                               SizedBox(width: dialogInnerWidth, child: Row(children: [
@@ -572,11 +608,12 @@ class _RatingsTableState extends State<RatingsTable> {
       try {
         r = Ratings.decode(data);
       } on AssertionError catch (_) {
+        // TODO remove this when all updated
         var x = jsonDecode(data);
         if (x is List) {
           logger.i("Ratings file is version <= 0.2.0"
               "\n\tUpdating...");
-          r = Ratings.decodeList(x);
+          r = Ratings.decodeList(x, '');
           _writeRatings(r);
         }
       }
