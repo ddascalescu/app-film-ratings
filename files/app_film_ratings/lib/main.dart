@@ -173,6 +173,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                   child: TextField(
                                       controller: _textController,
                                       textAlign: TextAlign.center,
+                                      textCapitalization: TextCapitalization.sentences,
                                       decoration: const InputDecoration(hintText: 'The Shawshank Redemption')
                                   )
                               ),
@@ -281,6 +282,7 @@ class _RatingsTableState extends State<RatingsTable> {
                               SizedBox(width: dialogInnerWidth, height: 100, child: PaddingAll(padding: pad,
                                   child: TextField(
                                       controller: _descrController,
+                                      textCapitalization: TextCapitalization.sentences,
                                       decoration: const InputDecoration(
                                           hintText: "Optional description...",
                                           border: OutlineInputBorder()
