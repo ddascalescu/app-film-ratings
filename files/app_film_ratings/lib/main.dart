@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:data_table_2/data_table_2.dart';
 import 'package:logger/logger.dart';
@@ -41,6 +42,11 @@ class App extends StatelessWidget {
     return MaterialApp(
         title: appTitle,
         theme: appTheme.themeData(),
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        supportedLocales: const [
+          Locale('en', 'GB'),
+          Locale('en', 'US')
+        ],
         home: const MainScreen()
     );
   }
@@ -211,6 +217,7 @@ class _RatingsTableState extends State<RatingsTable> {
                                             initialDate: _selectedDate,
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime.now(),
+                                            locale: const Locale('en', 'GB'),
                                             builder: (BuildContext context, Widget? child) {
                                               return Theme(
                                                   data: appTheme.themeDataPicker(),
