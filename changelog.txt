@@ -19,19 +19,19 @@
 
 0.2.1 - Backward Compatibility (XX/XX/XX)
   - Changed description to type
-  - Add description entry box
+  - Added description entry box
   - Added version code to json file
     - Applying compatibility measures from versions <= 0.2.0
   - Added local backups (per 7 days)
   - Added deletion double-check
   - Set default and minimum window size for Windows
-  - Start date picker week on monday
+  - Set week-start of date picker to monday
+  - Made auto CAPS for text input on mobile
+  - Ellipsis on details tab (+ reorg)
 
 ===== PLANNED =====
 
 0.2.1 - backward compatibility
-  - Caps text input
-  - Ellipsis on details tab
 
 0.2.2 - code organisation
   - Make the Dialog box a class, with a show() method and get() methods for retrieving the current values in the add method

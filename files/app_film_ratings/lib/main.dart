@@ -400,14 +400,15 @@ class _RatingsTableState extends State<RatingsTable> {
 
                               /* ENTRY: Film title */
                               InputRow(
-                                  child: TextField(
-                                      readOnly: true,
-                                      controller: TextEditingController(
-                                          text: rating.filmTitle
-                                      ),
-                                      textAlign: TextAlign.center
+                                  child: PaddingAll(padding: pad, child: Text(
+                                      rating.filmTitle,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 15
+                                      )
                                   )
-                              ),
+                              )),
 
                               /* ENTRY: Film year */
                               InputRow(
@@ -448,12 +449,13 @@ class _RatingsTableState extends State<RatingsTable> {
                               /* ENTRY: Type */
                               InputRow(
                                   prompt: "Type:",
-                                  child: TextField(
-                                      readOnly: true,
-                                      controller: TextEditingController(
-                                        text: Ratings.types[rating.typeId],
-                                      ),
-                                      textAlign: TextAlign.right
+                                  child: Text(
+                                      Ratings.types[rating.typeId] ?? "",
+                                      textAlign: TextAlign.right,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 15
+                                      )
                                   )
                               ),
 
