@@ -17,7 +17,7 @@
   - Added description dropdown
   - Added Rating 'uuid' and 'timestamp' fields
 
-0.2.1 - Backward Compatibility (16/02/23)
+0.2.1 (Apples testing) - Backward Compatibility (16/02/23)
   - Changed description to type
   - Added description entry box
   - Added version code to json file
