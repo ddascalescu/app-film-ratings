@@ -4,9 +4,9 @@ A Flutter app for rating films and data visualization.
 Versions:
  - Android:
    - Google Play: Not yet released
-   - APK: [0.2.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.0-apples-android)
+   - APK: [0.2.1](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.1-prebutter)
  - iOS: Not yet released
- - Windows: [0.2.0](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.0-apples)
+ - Windows: [0.2.1](https://github.com/ddascalescu/app-film-ratings/releases/tag/v0.2.1-prebutter)
  - Web: Not yet completed
  - Linux: Not yet completed
  - macOS: Not yet completed
@@ -25,9 +25,8 @@ Mobile examples:
 
 #
 
-In progress (in progress): Version 0.2.1:
- - Adding backward compatibility and redundancy
- - Minor feature changes
+In progress (on hold since 17-Feb): Version 0.2.2:
+ - Code organisation
 
 [Full changelog](https://github.com/ddascalescu/app-film-ratings/blob/main/changelog.txt)
 
